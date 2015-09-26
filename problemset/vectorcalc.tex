@@ -590,25 +590,26 @@ requestion, or opening an \emph{issue} at
 
 	\end{tikzpicture}
 	\end{center}
-	
+
+	In this picture $\|\vec a\|=4$, $\theta = \pi/6$, and $\vec b=\mat{6\\0}$.
 	%%%
 	% XXX: This is confusing with multiple b vectors. Should instead emphasise that proj_b(a ) = proj_{-b}(a).
 	%%%
 	\begin{Enum}
-		\item In this picture $\|\vec a\|=4$ and $\theta = \pi/6$.  
-			Find $\|\Proj_{\vec b}\vec a\|$ and $\|\Perp_{\vec b}\vec a\|$.
-		\item If $\vec b=\begin{bmatrix}6\\0\end{bmatrix}$, write down 
+		\item   Write $\vec a$ in column vector form.
+		\item   Find $\|\Proj_{\vec b}\vec a\|$ and $\|\Perp_{\vec b}\vec a\|$.
+		\item Write down 
 				$\Proj_{\vec b}\vec a$ and $\Perp_{\vec b}\vec a$ in column vector
 				form.
-		\item If $\vec b=\begin{bmatrix}-4\\0\end{bmatrix}$, write down 
-				$\Proj_{\vec b}\vec a$ and $\Perp_{\vec b}\vec a$ in column vector
+		\item If $\vec c=\mat{-4\\0}$, write down 
+				$\Proj_{\vec c}\vec a$ and $\Perp_{\vec c}\vec a$ in column vector
 				form.
-		\item If $\vec b=\begin{bmatrix}3\\1\end{bmatrix}$, write down 
-				$\Proj_{\vec b}\vec a$ and $\Perp_{\vec b}\vec a$ in column vector
+		\item If $\vec d=\mat{3\\1}$, write down 
+				$\Proj_{\vec d}\vec a$ and $\Perp_{\vec d}\vec a$ in column vector
 				form.  (You may need to use your knowledge of how dot products and angles
 				relate to answer this one.)
-		\item Consider $\vec u=\begin{bmatrix}3\\1\end{bmatrix}$.  Compute $\proj_{\xh}\vec u$ and 
-		$\proj_{\yh}\vec u$.  How do these projections relate to the coordinates of $\vec u$? What
+		\item Consider $\vec d=\mat{3\\1}$.  Compute $\proj_{\xh}\vec d$ and 
+		$\proj_{\yh}\vec d$.  How do these projections relate to the coordinates of $\vec d$? What
 		can you say in general about projections onto $\xh$ and $\yh$?
 	\end{Enum}
 	
@@ -626,7 +627,7 @@ requestion, or opening an \emph{issue} at
 	\end{Enum}
 
 	\begin{Def}
-		A \emph{normal vector} to a line (or plane or hyperplane) is one that is orthogonal to it.
+		A \emph{normal vector} to a line (or plane or hyperplane) is a non-zero vector that is orthogonal to it.
 	\end{Def}
 
 	\begin{Enum}[resume]
@@ -670,9 +671,6 @@ requestion, or opening an \emph{issue} at
 \newpage
 
 	\subsection*{Moving to Planes}
-	When solving equations, sometimes we get to make choices. For example, 
-	if $x+2y=0$, we can find solutions by fixing either $x$ or $y$ and solving
-	for the other. e.g., if $x=2$, then $y=-1$ and if $y=3$ then $x=-6$.
 	
 	\sep
 	\vspace{-1cm}
@@ -681,11 +679,9 @@ requestion, or opening an \emph{issue} at
 		\begin{equation}\label{eq1}
 			2x+y-z=0.
 		\end{equation}
-		\item Is $2\vec a-\vec b$ a solution?  Is any linear combination of solutions a solution?  Justify why or why not.
 		\item Find $\vec n\in\R^3$ so that equation (\ref{eq1}) in is equivalent
 		to $\vec n\cdot \vec x=0$ where $\vec x=\begin{bmatrix}x\\ y\\ z\end{bmatrix}$.
 		\item What do you notice about the angle between solutions to equation (\ref{eq1}) and $\vec n$?
-		\item Prove that any plane of the form $\vec n\cdot \vec x=0$ is a subspace.
 	\end{Enum}
 
 	When writing down solutions to equation (\ref{eq1}), you got to choose two coordinates before the remaining
@@ -725,7 +721,7 @@ requestion, or opening an \emph{issue} at
 		but passes through the origin.
 		\item Draw a picture of $L$ and $L_2$, and find two points that lie on
 		$L$.  Call these points $p_1$ and $p_2$.
-		\item Verify the vector $\overline {p_1p_2}$ is perpendicular to $\vec n$.
+		\item Verify the vector $\overline {p_1p_2}$ is orthogonal to $\vec n$.
 		\item What is $\vec n\cdot p_1$, $\vec n\cdot p_2$, $\vec n\cdot p$?
 		Should these values be zero, equal, or different?  Explain (think about
 		projections).
