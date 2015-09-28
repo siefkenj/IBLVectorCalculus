@@ -738,6 +738,110 @@ requestion, or opening an \emph{issue} at
 
 \newpage
 
+\section*{Arc Length}
+
+	\sep
+	The parameterized curve
+	\[
+		\vec r(t) = \mat{2\cos t\\2\sin t}
+	\]
+	describes the position of a particle at time $t$.
+	\begin{Enum}
+		\item Describe the path and motion of this particle in words.
+		\item Compute the displacement  of the particle between $t=0$
+			and $t=\Delta t$ and call the resulting vector $\Delta \vec r$.  
+			(Assume $\Delta t$ is small.)
+		\item Approximate the length of $\Delta \vec r$.  You may use the fact that
+			\[
+				\sin x\approx x\qquad\text{and}\qquad \cos x\approx -\tfrac{1}{2}x^2+1
+			\]
+			when $x\approx 0$.
+		\item Use a limit to compute the velocity of the particle at $t=0$. Call this 
+			vector $\vec v_0$.
+		\item Use a limit to compute the speed at $t=0$.  Call this value $s_0$.
+		\item How do $\|\vec v_0\|$ and $s_0$ relate?  Why?
+	\end{Enum}
+
+	\sep
+	A particle's path is parameterized by
+	\[
+		\vec m(t) = (f(t), g(t), h(t))
+	\]
+	where $t$ represents time.
+	\begin{Enum}
+		\item Derive (with explanation) a formula for the velocity of
+			the particle at time $t=t_0$.
+		\item Derive (with explanation) a formula for the speed of
+			the particle at time $t=t_0$.
+	\end{Enum}
+	
+	\sep
+	Recall the particle whose path is given by
+	$
+		\vec r(t) = \mat{2\cos t\\2\sin t}
+	$
+	where $t$ represents time.
+	\begin{Enum}
+		\item Use the fact that
+			\[
+				\text{distance traveled}=\int\text{\it speed}\ \mathrm{d}\text{\it time}
+			\]
+		to produce a formula for how far the particle has traveled from $t=0$ to $t=t_0$.
+		\item Use geometry to do the same thing.
+		\item Derive an expression (with explanation) for the arc length of $\vec m(t) = (f(t), g(t), h(t))$
+			from $t=0$ to $t=t_0$.
+	\end{Enum}
+
+\subsection*{Arc Length Parameterization}
+	
+	An \emph{arc length parameterization} of a curve $C$ is a function $\vec s:\R\to\R^n$ whose
+	image is $C$ with the added property that the arc length of $\vec s(t)$ from $t=0$ to $t=t_0$
+	is $t_0$ for all valid choices of $t_0$.  I.e., the distance traveled by the parameter along
+	$\R$ is the same as the distance traveled by the point $\vec s(t)$ in $\R^n$.
+
+	\sep
+	\vspace{-1cm}
+	\begin{Enum}
+		\item Produce an arc length parameterization of the curve parameterized by
+			$
+				\vec r(t) =\mat{2\cos t\\ 2\sin t}.
+			$
+		\item Produce an arc length parameterization of the curve parameterized by
+			$
+				\vec q(t) =\mat{t\\ t^2}.
+			$
+	\end{Enum}
+
+	
+	An arc length parameterization of a curve can also be thought of
+	as a parameterization where a particle always moves at unit speed 
+	(if you interpret a parameterized curve as describing the motion of a
+	particle).
+
+	By reparameterizing, we can describe the motion of a particle along
+	a path at any speed.
+
+	\sep
+	A particle moves along a path $C$ which is a circle in $\R^2$ of radius $3$, centered at the origin, and oriented counter-clockwise.
+	\begin{Enum}
+		\item Parameterize $C$ so that the speed of the particle starts at $0$ and ends at $4$.
+		\item Parameterize $C$ so that the speed of the particle starts and ends at $0$.
+		\item Parameterize $C$ so that the speed is $2.5$.
+		\item Parameterize $C$ so that the speed of the particle starts is $0$ at six points along the curve.
+	\end{Enum}
+
+	\sep
+	A particle's motion is described by the function $\vec h(t) = \mat{f(t)\\ g(t)}$  which is a 
+	parameterization of the curve $H$.  The arc length of $H$ from $t=0$ to
+	$t=t_0$ using this parameterization is is given by the function $s(t_0) = t_0^2$.
+	\begin{Enum}
+		\item Write an expression for the speed of a particle at time $t$.
+		\item Give a formula for the arc length parameterization of $H$.
+	\end{Enum}
+
+		
+
+\newpage
 \section*{Systems of Linear Equations}
 	
 	\emph{Linear equations} are equations only involving variables, 
