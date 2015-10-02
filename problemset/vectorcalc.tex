@@ -15,6 +15,9 @@
 \usepackage{color}
 \usepackage{tikz}
 \usepackage{fancyhdr}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 %\usepackage[hidelinks]{hyperref}
 %\usepackage{wrapfig}
 
@@ -808,7 +811,7 @@ requestion, or opening an \emph{issue} at
 			$
 		\item Produce an arc length parameterization of the curve parameterized by
 			$
-				\vec q(t) =\mat{t\\ t^2}.
+				\vec q(t) =\mat{t\\ t^{3/2}}.
 			$
 	\end{Enum}
 
@@ -822,24 +825,164 @@ requestion, or opening an \emph{issue} at
 	a path at any speed.
 
 	\sep
-	A particle moves along a path $C$ which is a circle in $\R^2$ of radius $3$, centered at the origin, and oriented counter-clockwise.
+	A particle moves along a path $C$, which is a circle in $\R^2$ of radius $3$, centered at the origin, and oriented counter-clockwise.
 	\begin{Enum}
 		\item Parameterize $C$ so that the speed of the particle starts at $0$ and ends at $4$.
 		\item Parameterize $C$ so that the speed of the particle starts and ends at $0$.
 		\item Parameterize $C$ so that the speed is $2.5$.
-		\item Parameterize $C$ so that the speed of the particle starts is $0$ at six points along the curve.
+		\item Parameterize $C$ so that the speed of the particle is $0$ at six points along the curve.
 	\end{Enum}
 
 	\sep
-	A particle's motion is described by the function $\vec h(t) = \mat{f(t)\\ g(t)}$  which is a 
+	A particle's motion is described by the function $\vec h(t) = \mat{f(t)\\ g(t)}$,  which is a 
 	parameterization of the curve $H$.  The arc length of $H$ from $t=0$ to
 	$t=t_0$ using this parameterization is is given by the function $s(t_0) = t_0^2$.
 	\begin{Enum}
-		\item Write an expression for the speed of a particle at time $t$.
+		\item Write an expression for the speed of the particle at time $t$.
 		\item Give a formula for the arc length parameterization of $H$.
 	\end{Enum}
 
-		
+	
+\section*{Tangents, Normals, and Acceleration}
+	
+	\vspace{-1cm}
+	\begin{Def}
+	Suppose $\vec r(t)$ describes the motion of a particle.  The \emph{velocity}
+	of the particle is defined as
+	\[
+		\vec v(t) = \lim_{h\to 0} \frac{\vec r(t+h)-\vec r(t)}{h}.
+	\]
+	The \emph{acceleration}
+	of the particle is defined as
+	\[
+		\vec a(t) = \lim_{h\to 0} \frac{\vec v(t+h)-\vec v(t)}{h}.
+	\]
+	\end{Def}
+	Both $\vec v$ and $\vec a$ are vector-valued derivatives.
+
+	\sep
+	Let $\vec r(t) = \mat{t+2\\ \sin t\\ t^3}$ represent the position of a particle at time $t$.
+	\begin{Enum}
+		\item Find the velocity of the particle at time $t$.
+		\item Find the acceleration of the particle at time $t$.
+	\end{Enum}
+
+	\sep
+	Let $\vec r_\ell(t) = \mat{\frac{t^2}{2}\\\frac{t^2}{2}}$ and $\vec r_c(t) = \mat{\cos t\\ \sin t}$ represent the position
+	of the particles $r_\ell$ and $r_c$ at time $t$.
+	\begin{Enum}
+		\item Describe the paths of each of these particles.  What should their accelerations be?  Why?
+		\item Compute the accelerations of $r_\ell$ and $r_c$ at time $t$.
+		\item Compute the tangent vectors for the functions $\vec r_\ell$ and $\vec r_c$ at time $t$.
+			How does the direction of the tangent vectors and the direction of the acceleration vectors
+			compare?
+	\end{Enum}
+
+	If $\vec r(t)$ describes the position of a particle at time $t$ and $\vec a(t)$ its acceleration, $\vec a(t)$
+	can be decomposed into a \emph{tangential} component, $\vec a_T(t)$, and a \emph{normal} component $\vec a_N(t)$
+	so that
+	\[
+		\vec a(t) = \vec a_T(t) +\vec a_N(t).
+	\]
+
+	\sep
+	Let $\vec r_{c\ell}(t) = \mat{\frac{t^2}{2}+\cos t\\\frac{t^2}{2}+\sin t}$  represent the position
+	of the particle $r_{c\ell}$ at time $t$.
+	\begin{Enum}
+		\item Compute the tangential and normal components of the acceleration of $r_{c\ell}$.
+		\item By changing the speed of $r_{c\ell}$ (but not its path), is it possible to make 
+			the tangential component of its acceleration zero?
+		\item By changing the speed of $r_{c\ell}$ (but not its path), is it possible to make 
+			the normal component of its acceleration zero?
+	\end{Enum}
+
+	We're going to develop some tools to mathematically verify our intuition about the acceleration
+	vector.
+
+	\sep
+	\vspace{-1cm}
+	\begin{Enum}
+		\item Suppose $\vec p(t)$ and $\vec q(t)$ are both vector-valued functions.  Expand $\vec p(t)\cdot\vec q(t)$
+		using components. Now, come up with an expression for $\Big(\vec p(t)\cdot\vec q(t)\Big)'$.  Look at your
+		result and rewrite it as an expression involving dot products.
+		You've just discovered a product rule for the dot product!
+		\item Using similar methods to the computation of $\Big(\vec p(t)\cdot\vec q(t)\Big)'$, find an expression
+			for $\|\vec p(t)\|'$.
+		\item If a particle whose path is given by $\vec r(t)$ is moving at unit speed, then $\|\vec v(t)\| = 1$.
+			Take derivatives of both sides of this expression to show that $\vec v(t)\cdot \vec a(t) = 0$.
+	\end{Enum}
+
+%
+%	\vspace{-.7cm}
+%	\begin{Def}
+%		Suppose $\vec r_s(t)$ is an arc length parameterization of some curve $C$.
+%		The \emph{curvature} of $C$ at the point $\vec r_s(t)$ is
+%		\[
+%			\kappa(t) = \|\vec a_s(t)\|
+%		\]
+%		where $\vec a_s(t)$ is the second derivative of $\vec r_s(t)$.
+%	\end{Def}
+%
+%	Having an arc length parameterization of $C$ is essential in order to use this definition
+%	of curvature, but when computing curvature, we can do without.
+%
+%	\sep
+%	Let 
+%	\begin{Enum}
+%		\item 
+%	\end{Enum}
+
+
+\vspace{-.5cm}
+\section*{Visualizing Surfaces}
+	As we've already seen, being able to picture multi-dimensional objects is 
+	invaluable when intuiting solutions and when coming up with mathematical
+	justifications for intuition.  There are two main ways we visualize
+	2D surfaces: perspective drawings and level-curves.
+
+
+	\sep
+		Consider the surface defined by $z=f(x,y)$ where $f(x,y)=x^2+y^2$.
+	\begin{Enum}
+		\item On a single $xy$-plane, draw the set of points satisfying the equations $0=f(x,y)$, $1=f(x,y)$,
+			$2=f(x,y)$, $3=f(x,y)$, and $4=f(x,y)$.  What is the set of points satisfying $-1=f(x,y)$?
+	\end{Enum}
+	The curves you just drew are called \emph{level curves}.
+	\begin{Enum}[resume]
+		\item Plot in 3D the function $z=f(x,y)$ for $z=0,1,2,3,4$.  Are you able to see what this surface looks like?
+		\item We can plot more and more contours of this surface until we have a good idea of what it looks like.
+			Add the set of points $z=f(0,y)$ and $z=f(x,0)$ to your plot.
+	\end{Enum}
+
+
+	\sep
+	Level curves are contours produced by fixing $z$ and graphing the result.  Other useful contours
+	come about by fixing $x$ or $y$.  Use any contour-based method to plot the following surfaces.
+	\begin{Enum}
+		\item $z=x^2-y^2$
+		\item $z^2=4x^2+y^2$
+		\item $z^2=9-(4x^2+y^2)$
+		\item $z=(\sin x)(\sin y)$
+	\end{Enum}
+
+\begin{tikzpicture}
+	\begin{axis}[view/az=14]
+	\addplot3[mesh,draw=red,samples=10] {x^2-y^2};	
+	\end{axis}
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture} 
+\begin{axis}[ title={$x \exp(-x^2-y^2)$ and its gradient}, domain=-2:2, view={0}{90}, axis background/.style={fill=white}, ] 
+	\addplot3[blue, quiver={ u={exp(0-x^2-y^2)*(1-2*x^2)}, v={exp(0-x^2-y^2)*(-2*x*y)}, scale arrows=0.3, }, -stealth,samples=15] {exp(0-x^2-y^2)*x}; 
+\end{axis} 
+\end{tikzpicture}
+
+	
+	
+\newpage
+x
 
 \newpage
 \section*{Systems of Linear Equations}
