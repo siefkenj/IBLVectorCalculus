@@ -15,6 +15,7 @@
 \usepackage{color}
 \usepackage{tikz}
 \usepackage{fancyhdr}
+\usepackage{calc}
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
@@ -827,9 +828,9 @@ requestion, or opening an \emph{issue} at
 	\sep
 	A particle moves along a path $C$, which is a circle in $\R^2$ of radius $3$, centered at the origin, and oriented counter-clockwise.
 	\begin{Enum}
-		\item Parameterize $C$ so that the speed of the particle starts at $0$ and ends at $4$.
-		\item Parameterize $C$ so that the speed of the particle starts and ends at $0$.
 		\item Parameterize $C$ so that the speed is $2.5$.
+		\item Parameterize $C$ so that the speed of the particle starts and ends at $0$.
+		\item Parameterize $C$ so that the speed of the particle starts at $0$ and ends at $4$.
 		\item Parameterize $C$ so that the speed of the particle is $0$ at six points along the curve.
 	\end{Enum}
 
@@ -965,25 +966,114 @@ requestion, or opening an \emph{issue} at
 		\item $z=(\sin x)(\sin y)$
 	\end{Enum}
 
-\begin{tikzpicture}
-	\begin{axis}[view/az=14]
-	\addplot3[mesh,draw=red,samples=10] {x^2-y^2};	
-	\end{axis}
-\end{tikzpicture}
+\newpage
+\section*{Directional Derivatives}
 
+	\sep
+	It is winter in Chicago.  Imagine a bug crawling along the floor of
+	a room that is $7\times 7$ meters.  Figure \ref{heatcontour1} shows the contour plot of the heat
+	of the floor in Fahrenheit.\footnote{The bug questions are due to Mairead Greene, Amy Ksir, and Christine von Renesse.}
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=3.5in]{heat_contour1.pdf}
+		\end{center}
+		\vspace{-.5cm}
+		\caption{Heat contours for a room.}
+		\label{heatcontour1}
+	\end{figure}
+	\begin{Enum}
+		\item Where is the door to the outside?  Where is the window?  Where is the heater? Why?
+			What might be in the lower right corner of the room?
+		\item The bug would like to crawl from the window to the right wall along a path that minimizes
+			the change in temperature.  Draw two such paths.
+		\item The bug makes a circuit around the entire room by walking along the walls clockwise.
+			Draw a graph of distance verses temperature for this part of the bug's journey.  How
+			do the starting values and ending values of your graph compare?  Is the accuracy of your
+			graph limited?
+	\end{Enum}
+	
+	\sep Figure \ref{heatcontour2} shows the path the bug decided to follow.
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[width=3.5in]{heat_contour2.pdf}
+		\end{center}
+		\vspace{-.5cm}
+		\caption{Heat contours for a room.}
+		\label{heatcontour2}
+	\end{figure}
+	\begin{Enum}
+		\item Find the average change in temperature from $P$ to $Q$ for the bugs journey.
+		\item Estimate the instantaneous rate of change of temperature at the point $P$.
+		\item Suppose $T(x,y)$ gives the temperature of the room at the coordinates $(x,y)$.
+			Write a limit expression to compute the exact rate of change of temperature
+			at the beginning of the bug's journey. Does the rate of change depend on time?
+		\item Write a limit expression to compute the rate of change of temperature
+			\emph{with respect to distance} at the start of the bug's journey.
+		\item If the bug had decided to travel in a different direction, would the rate of change
+			of temperature be the same?  Explain.
+	\end{Enum}
+	
+	\newpage
+	\sep
+	Let $f(x,y) = 2(x-3)^2+y$
+	\begin{Enum}
+		\item Calculate the rate of change of $f$ at the origin 
+			in the directions $\xh$, $\yh$, $\vec a=(\tfrac{\sqrt{2}}{2},\tfrac{\sqrt{2}}{2})$.
+		\item Calculate the rate of change of $f$ at $p=(1,-1)$
+			in the directions $\xh$, $\yh$, $\vec a=(\tfrac{\sqrt{2}}{2},\tfrac{\sqrt{2}}{2})$.
+	\end{Enum}
 
+\subsection*{A New Perspective on Derivatives}
 
-\begin{tikzpicture} 
-\begin{axis}[ title={$x \exp(-x^2-y^2)$ and its gradient}, domain=-2:2, view={0}{90}, axis background/.style={fill=white}, ] 
-	\addplot3[blue, quiver={ u={exp(0-x^2-y^2)*(1-2*x^2)}, v={exp(0-x^2-y^2)*(-2*x*y)}, scale arrows=0.3, }, -stealth,samples=15] {exp(0-x^2-y^2)*x}; 
-\end{axis} 
-\end{tikzpicture}
+	In single-variable calculus, we deal with functions $g:\R\to\R$.  The derivative of this function
+	at a point $a$ is the rate of change of $g$ at the point $a$.
+
+	\sep
+	Let $g(x)=x^2$.
+	\begin{Enum}
+		\item What is the rate of change of $g$ at the points $x=0,1,$ and $2$?  How about at $x=x_0$?
+		\item Use your knowledge of the rate of change of $g$ to \emph{approximate} $g(x)$ where
+			$x=0+\varepsilon, 1+\varepsilon,$ and $2-\varepsilon$ where $\varepsilon>0$ is a tiny number.
+		\item Write down three functions: $G_0$, $G_1$, and $G_2$ so that if $\varepsilon$ is tiny, $g(a+\varepsilon)\approx
+			g(a) + G_a(\varepsilon)$.  
+	\end{Enum}
+
+	\sep
+	Recall $f(x,y)=2(x-3)^2+y$ from before.
+	\begin{Enum}
+		\item Write down a function $F_{(0,0)}:\R^2\to\R$ such that if $\vec u$ is a vector
+			and $\|\vec u\|$ is tiny, 
+			\[
+				f(\vec 0+\vec u)\approx f(\vec 0) + F_{(0,0)}(\vec u).
+			\]
+			Notice, $F_{(0,0)}$ is somehow representative of the rate of change of $f$ at $(0,0)$.
+			It may help to compute $F_{(0,0)}$ for several example directions before coming up
+			with a formula.
+		\item Write down a function $F_{(1,-1)}$ so that if $\vec u$ is a vector and $\|\vec u\|$ is
+			tiny, $f\Big((1,-1)+\vec u\Big)\approx f(1,-1)+F_{(1,-1)}(\vec u)$.
+		\item Can a single number represent the rate of change of $f$ at the point $(0,0)$?  Why or why not?
+			If a number cannot, can you think of another object that can?
+	\end{Enum}
+
+%\begin{tikzpicture}
+%	\begin{axis}[view/az=14]
+%	\addplot3[mesh,draw=red,samples=10] {x^2-y^2};	
+%	\end{axis}
+%\end{tikzpicture}
+%
+%
+%
+%\begin{tikzpicture} 
+%\begin{axis}[ title={$x \exp(-x^2-y^2)$ and its gradient}, domain=-2:2, view={0}{90}, axis background/.style={fill=white}, ] 
+%	\addplot3[blue, quiver={ u={exp(0-x^2-y^2)*(1-2*x^2)}, v={exp(0-x^2-y^2)*(-2*x*y)}, scale arrows=0.3, }, -stealth,samples=15] {exp(0-x^2-y^2)*x}; 
+%\end{axis} 
+%\end{tikzpicture}
 
 	
 	
 \newpage
-x
 
+$\phantom{x}$
 \newpage
 \section*{Systems of Linear Equations}
 	
