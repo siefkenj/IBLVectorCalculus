@@ -1055,6 +1055,141 @@ requestion, or opening an \emph{issue} at
 			If a number cannot, can you think of another object that can?
 	\end{Enum}
 
+\newpage
+
+	\begin{Def}
+		The \emph{directional derivative} of a function $f:\R^n\to\R^m$ at the
+		point $\vec a$ in the direction $\vec u$ is
+		\[
+			D_{\vec a}f(\vec u) = \lim_{h\to 0} \frac{f(\vec a+h\vec u)-f(\vec a)}{h}.
+		\]
+		I.e., it is the rate of change of $f$ at $\vec a$ heading in the direction of $\vec u$
+		with speed $\|\vec u\|$.
+	\end{Def}
+
+	\sep
+	Let $f(x,y) = (x+1)^2+2y$.
+	\begin{Enum}
+		\item Give a parameterization of all two dimensional unit vectors.
+		\item Use the definition of the directional derivative to compute
+			the directional derivative of $f$ at the point $(0,0)$ in the
+			direction of each of your parameterized unit vectors.
+		\item Find the direction of the maximal directional derivative.  You
+			may find the identity $\sin t+\cos t = \sqrt{2}\sin(t+\tfrac{\pi}{4})$
+			helpful.
+	\end{Enum}
+
+	\vspace{-.7cm}
+	\begin{Def}
+		The \emph{gradient} of a function $f:\R^n\to \R$ is
+		\[
+			\nabla f  = \left(
+				\frac{\partial f}{\partial x_1}, 
+				\frac{\partial f}{\partial x_2}, \ldots,
+				\frac{\partial f}{\partial x_n}
+			\right)
+		\]
+		where $x_1,\ldots, x_n$ are the parameters of $f$.
+	\end{Def}
+	
+	\sep
+	Let $f(x,y) = (x+1)^2+2y$ as before.
+	\begin{Enum}
+		\item Compute $\nabla f(0,0)$ (the gradient of $f$ at the point $(0,0)$).
+		\item Compute $\nabla f(0,0)\cdot \vec u$ for each of your parameterized unit vectors $\vec u$.
+			What do you notice?
+		\item Make a conjecture about how the gradient of a function can be used to compute directional derivatives.
+	\end{Enum}
+
+	\sep
+	Sticking with $f(x,y) = (x+1)^2+2y$, consider the surface $S=\{\big(x,y,f(x,y)\big):x,y\in\R^2\}$.
+	\begin{Enum}
+		\item Describe $S$.  If $a\in S$, what should \emph{the tangent plane to $S$ at $a$} mean?
+		\item Compute the tangent plane, $\mathcal P$, to $S$ at the point $\big(0,0,f(0,0)\big)$ in vector form.
+		\item Find standard/normal form of the tangent plane and solve for $z$.  That is,
+			find an equation for the tangent plane in the form $z=ax+by+c$.  Do the values $a$, $b$, and
+			$c$ look familiar?
+		\item Consider the function $g=f-\mathcal P$.  That is, $g(x,y)=f(x,y)-z(x,y)$ where $z(x,y)$ is the
+			equation of the tangent plane.  What should the directional derivative of $g$ at $(0,0)$ be?
+			Does it depend on direction?
+	\end{Enum}
+
+	So far, the gradient has been appearing in directional derivatives and tangent planes.
+	One might even argue that the gradient \emph{is} the derivative.  Unfortunately, the gradient
+	of a function existing is not sufficient for a function to be differentiable.
+
+	\vspace{-.7cm}
+	\begin{Def}
+		The function $f:\R^n\to \R$ is \emph{differentiable} at $\vec a=(a_1,\ldots,a_n)$ if there exists
+		a tangent plane at $\vec a$.  That is, there exists some function $p(x_1,\ldots, x_n)
+		= c+\sum \alpha_i (x_i-a_i) = c+\vec \alpha \cdot(\vec x-\vec a)$ so that
+		\[
+			\lim_{\|\vec u\|\to0} \frac{f(\vec a + \vec u)-p(\vec a + \vec u)}{\|\vec u\|} = 0.
+		\]
+	\end{Def}
+
+	There's just one trouble with this definition.  How do we take a limit as $\|\vec u\|\to 0$?
+
+\newpage
+\subsection*{Multidimensional Limits}
+
+	\begin{Def}
+		If $f:\R^n\to \R$, then the \emph{limit of $f$ at $\vec a$} exists and is equal to $L$, written
+		$\displaystyle \lim_{\vec x\to\vec a} f(\vec x) = L$, if
+		for all $\varepsilon > 0$ there exists a $\delta > 0$ such that
+		\[
+			0<\|\vec x-\vec a\| <\delta \qquad \text{implies}\qquad |f(\vec x) - L| < \varepsilon.
+		\]
+		If no such $L$ exists, we say the limit does not exist.
+	\end{Def}
+	When first considered, the definition of limit can be confusing, so let's play with some functions
+	that we're familiar with.
+
+	\sep
+	Let $f(x) = 3x$.
+	\begin{Enum}
+		\item  Draw the graph of $f$ and use your intuition to guess $\lim_{x\to 0} f(x)$.  Call your
+			guess $L$.
+		\item If $\varepsilon = 1/2$, can you find a $\delta$ so that if $|x-0|<\delta$ we can be assured
+			$|f(x)-L|<\varepsilon$?
+		\item If $\varepsilon = 1/4$, can you find a $\delta$ so that if $|x-0|<\delta$ we can be assured
+			$|f(x)-L|<\varepsilon$?
+		\item Come up with a rule for how to choose an appropriate $\delta$ for any $\varepsilon$.
+	\end{Enum}
+
+	\sep
+	Let $g(x) = \frac{x}{|x|}$, and let $L$ be a guess for $\lim_{x\to 0} \frac{x}{|x|}$.
+	\begin{Enum}
+		\item Suppose we guess $L=1$.  Picking $\varepsilon = 3/4$, can you find an appropriate
+			$\delta$?  What if $L=-1$?  For $\varepsilon=3/4$, can you find an appropriate $\delta$?
+			What if $L=0$?  What values can we rule out as possibilities for $L$?
+		\item Suppose we guess $L=0$.  Picking $\varepsilon=3/4$, can you find an appropriate $\delta$?
+			Is $0$ the limit?  Explain.
+		\item Find an $\varepsilon$ that shows that $g$ has no limit at $0$.
+	\end{Enum}
+
+	\sep
+	Let $h(x,y) = \frac{xy^2}{x^2+y^2}$.
+	\begin{Enum}
+		\item Give a parameterization of all vectors in $\R^2$ with length $r$.
+		\item If $\vec u\in \R^2$ satisfies $\|\vec u\|=r$, can you give upper
+			and lower bounds on $h(\vec u)$?
+		\item Explain why the limit $\displaystyle \lim_{\|\vec u\|\to 0} h(\vec u)$
+			does or doesn't exist.
+	\end{Enum}
+	\sep
+	Let $h(x,y) = \frac{xy}{x^2+y^2}$.
+	\begin{Enum}
+		\item Give a parameterization of all vectors in $\R^2$ with length $r$.
+		\item If $\vec u\in \R^2$ satisfies $\|\vec u\|=r$, can you give upper
+			and lower bounds on $h(\vec u)$?
+		\item Explain why the limit $\displaystyle \lim_{\|\vec u\|\to 0} h(\vec u)$
+			does or doesn't exist.
+	\end{Enum}
+
+
+
+
 %\begin{tikzpicture}
 %	\begin{axis}[view/az=14]
 %	\addplot3[mesh,draw=red,samples=10] {x^2-y^2};	
