@@ -85,6 +85,7 @@
 \newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\chr}{\mathrm{char}}
 \newcommand{\url}[1]{#1}
+\renewcommand{\d}{\mathrm{d}}
 
 %%%
 % Create a command that draws a horizontal line extending into the margin.
@@ -1188,7 +1189,106 @@ requestion, or opening an \emph{issue} at
 	\end{Enum}
 
 
+\newpage
+\subsection*{Lagrange Multipliers}
 
+	\sep
+	We know that $\nabla f(\vec a)\cdot \vec u$ gives the directional derivative
+	of $f$ at the point $\vec a$ in the direction $\vec u$.  Suppose
+	$\nabla f(\vec a) = (1,3)$.
+	\begin{Enum}
+		\item What is the direction of the biggest rate of change of $f$ at $\vec a$? Why?
+		\item In what direction is the least change in $f$ at $\vec a$?
+	\end{Enum}
+
+	\sep
+	Suppose $C$ is a level curve of $f$.  For $\vec a\in C$, suppose $\vec T_a$ is a tangent vector to
+	$C$ at $\vec a$.
+	\begin{Enum}
+		\item What is the rate of change of the function $f$ at $\vec a$ in the direction $\vec T_a$?
+		\item What is $\nabla f(\vec a)\cdot \vec T_a$?
+		\item If $f(x,y)=x^3+y^2$, find a tangent vector to the curve $C=\{(x,y):f(x,y)=2\}$ at $(1,1)$.
+	\end{Enum}
+
+	\sep
+	Consider a function $f:\R^2\to \R$ and a curve $C$ (not a level curve).  Let $\vec r(t)$
+	be a parameterization of $C$.  We are interested in the minimum and maximum values for 
+	$f\circ \vec r$ (i.e., the min/max values of $f$ on the curve $C$).
+	\begin{Enum}
+		\item What will $(f\circ \vec r)'$ be at a local maximum or minimum?
+		\item Explain how to interpret the quantity $(f\circ \vec r)'(t)$
+			as a directional derivative.
+		\item Use your knowledge of how the gradient allows you to compute directional derivatives
+			to come up with a ``chain rule'' for the expression $(f\circ \vec r)'(t)$.
+		\item Suppose $f(x,y) = 2x+y$ and $C$ is a circle of radius 1 centered at $\vec 0$.
+			Parameterize $C$ and attempt to find the maximum value that $f$ takes on the curve $C$.
+			Are these computations easy?
+	\end{Enum}
+
+	\sep
+	Let $f(x,y)=2x+y$ and let $C$ be a circle of radius 1 centered at $\vec 0$.
+	\begin{Enum}
+		\item Find a function $g:\R^2\to \R$ so that $C$ is a level curve of $g$.
+			Can you pick $g$ so that $C=\{(x,y): g(x,y)=0\}$?
+		\item What is the relationship between a tangent vector to $C$ at $\vec a$ and
+			$\nabla g(\vec a)$?
+		\item If $\vec a\in C$ is a maximum, what is the relationship between 
+			$\nabla f(\vec a)$ and $\nabla g(\vec a)$?  Can you describe this relationship
+			with a formula?
+		\item Use your formula from the previous part along with the constraint $g(x,y)=0$
+			to find the maximum value the function $f$ attains on the curve $C$.  Congratulations,
+			you've just discovered \emph{Lagrange Multipliers}!
+
+	\end{Enum}
+
+	\sep
+	We will use Lagrange Multipliers to find the dimensions of the largest box (the one with the most volume)
+	given that the surface area is $32$.
+	\begin{Enum}
+		\item Write down the function we wish to optimize, call it $f$, and rephrase our constraint
+			on surface area so that we may interpret it as the level curve of some function $g$.
+		\item Write down a relationship between $\nabla f$ and $\nabla g$ at the maximum.
+		\item Write down all equations obtained thus far, and attempt to solve for the dimensions of the box.
+			Do we need to solve for every variable?
+	\end{Enum}
+\newpage
+
+\section*{Iterated Integrals}
+	Integrals add things up, and iterated integrals are no different; it's just that instead of adding things
+	up in one dimension, we add things up in multiple dimensions.
+
+	\sep
+	To get our bearings, let's revisit integrating with respect of $\mathrm{d}x$ and $\mathrm{d}y$
+	when finding area.  Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$.
+	\begin{Enum}
+		\item Draw a picture representing how a Riemann sum could be used to compute the area of $T$.
+		\item Draw a picture representing a different way to compute the area of $T$ using a Riemann sum.
+		\item Compute the area of $T$ using an integral with respect to $x$; now using an integral with 
+			respect to $y$; now using the formula $\frac{1}{2}base\times height$.
+	\end{Enum}
+
+	\sep
+	Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$, and imagine that $T$
+	outlines a triangular strip of foil.  The density of this foil at any given point (in the 
+	first quadrant) is
+	$\rho(x,y) = x^2+y$.
+	\begin{Enum}
+		\item Using the fact that for this foil, $mass=density\times area$, write down two different
+			integrals that would compute the total mass of $T$, and draw their corresponding
+			Riemann-sum pictures.
+		\item Evaluate your two integrals.  Is one easier to evaluate than the other?
+		\item Can $(x^2+y)\mathrm{d}x\mathrm{d}y$ be interpreted on its own?
+	\end{Enum}
+
+	\sep
+	Let the region $R\subset \R^2$ be the area between the parabola $x=y^2$ and the line $x=1$.  Let 
+	$f(x,y)=3x+y^2$.
+	\begin{Enum}
+		\item Write down two different iterated integrals to compute $\displaystyle \iint_R f(x,y)\d x\d y$.
+		\item Is one of your integrals easier to evaluate than the other?
+		\item Describe a region $A$ so that 
+			$\displaystyle\iint_A f(x,y)\d x\d y = \int_0^1\int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} f(x,y)\d y\d x$.
+	\end{Enum}
 
 %\begin{tikzpicture}
 %	\begin{axis}[view/az=14]
