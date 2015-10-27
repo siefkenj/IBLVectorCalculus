@@ -1286,9 +1286,83 @@ requestion, or opening an \emph{issue} at
 	\begin{Enum}
 		\item Write down two different iterated integrals to compute $\displaystyle \iint_R f(x,y)\d x\d y$.
 		\item Is one of your integrals easier to evaluate than the other?
-		\item Describe a region $A$ so that 
-			$\displaystyle\iint_A f(x,y)\d x\d y = \int_0^1\int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} f(x,y)\d y\d x$.
+		\item Describe and draw a region $A$ so that 
+			$\displaystyle\iint_A f(x,y)\d x\d y = \int_{x=0}^{x=1}\int_{y=-\sqrt{1-x^2}}^{y=\sqrt{1-x^2}} f(x,y)\d y\d x$.
 	\end{Enum}
+
+\subsection*{The Volume Form}
+	We've been using integrals to find the area or volume (or hypervolume) under a curve.
+	Abstractly, this process has been the same every time: chop the region into little pieces, and
+	add up each pieces contribution with an integral to find the total.  We're continuing the same
+	process, but we're going to start chopping regions up into (sometimes) non-rectangular chunks.
+
+	\sepl
+	\begin{Enum}
+		\item Draw the lines $x=x_0$, $x=x_0+\Delta x$, $y=y_0$ and $y=y_0+\Delta y$ where
+			$\Delta x$ and $\Delta y$ are assume to be small.  Write down a formula for the area enclosed by
+			those lines.  Does your formula depend on $x_0$ and $y_0$?
+		\item Draw the curves, specified in polar coordinates by $r=r_0$, $r=r_0+\Delta r$, $\theta = \theta_0$,
+			and $\theta = \theta_0+\Delta\theta$ where $\Delta r$ and $\Delta \theta$ are assumed to
+			be small.  Write down a formula for the area enclosed by those curves.  Does your
+			formula depend on $r_0$ and $\theta_0$?
+		\item Using the idea that a limit as $\Delta ?\to 0$ of a Riemann sum results in an integral, 
+			write down a double-integral expression for the area of a semicircle of radius $1$
+			in both rectangular and polar coordinates.
+		\item Let $\Delta V(r_0,\theta_0) = r_0\Delta r\Delta\theta$, and let $V(r_0,\theta_0)$ be the exact
+			area of the annular (ring-shaped) section you found earlier.  What is $\displaystyle \lim_{\Delta r, \Delta\theta\to 0}
+			\frac{V(r_0,\theta_0)}{\Delta V(r_0,\theta_0)}$?  Do we need the $(\Delta r)^2\Delta \theta$ term
+			at infinitesimal scales?
+	\end{Enum}
+
+	\begin{Def}
+		Suppose $\mathcal F$ is a coordinate system for $\R^2$ specified by
+		$x=f_1(a,b)$ and $y=f_2(a,b)$.  The \emph{pre-volume form} associated with $\mathcal F$
+		at the point $(a,b)$ is written $\Delta V(a,b)$ and is the area between the curves
+		$a=a_0$, $a=a_0+\Delta a$, $b=b_0$, and $b=b_0+\Delta b$.
+
+		The \emph{volume form} associated with $\mathcal F$ at $(a,b)$ is the infinitesimal 
+		$\d V(a,b)$ obtained by replacing $\Delta w$ with $\d w$ and $(\Delta w)^2$ with $0$ in
+		the pre-volume form (where $w$ stands for any variable).
+	\end{Def}
+	For coordinate systems in $\R^3$ (and $\R^n$), the volume form is defined in an analogous way.
+
+	\sepl
+	\begin{Enum}
+		\item Write down the pre-volume and volume forms for polar coordinates.  What are the functions
+			$f_1$ and $f_2$ for polar coordinates?
+		\item Write down the pre-volume and volume forms for rectangular coordinates.  What
+			are the functions $f_1$ and $f_2$?
+		\item Let $\mathcal S$ be a stretched coordinate system.  That is, the point $(a,b)$ in
+			$\mathcal S$-coordinates corresponds to the point $(a/2, b/3)$ in rectangular 
+			coordinates.  Write down the pre-volume and volume forms for $\mathcal S$-coordinates.
+	\end{Enum}
+
+	\sep
+	Let $f(x,y)=x^2+y^2$ and let $D$ be a disk of radius 2 centered at the origin.  We would like to
+	find $A=\displaystyle \int_D f\d V$.
+	\begin{Enum}
+		\item Write down the bounds of $D$ in rectangular coordinates and set up (but don't evaluate)
+			an integral for $A$.
+		\item Write down the bounds of $D$ in polar coordinates and set up (but don't evaluate) an 
+			an integral for $A$.
+		\item Find $A$ by evaluating whichever integral you want.
+	\end{Enum}
+
+	\sep
+	Cylindrical coordinates for $\R^3$ take the form $(r,\theta, z)$ where the
+	$x-y$ plane is specified in polar coordinates by the first two components
+	and the height along the $z$-axis
+	is given by the third component.
+	\begin{Enum}
+		\item Compute the volume form for cylindrical coordinates.
+		\item A discuss is constructed from gluing two cones' bases together.
+			The radius of the base of each cone is $4$ and the height of each
+			cone is $1$.  Describe the surface of the discuss using polar coordinates
+			(you may need to describe the top and bottom separately)
+		\item The discuss has a density given by $\rho(x,y,z) = x^2+y^2+2|z|$.  Find the
+			mass of the discuss. (You may exploit symmetry.)
+	\end{Enum}
+
 
 %\begin{tikzpicture}
 %	\begin{axis}[view/az=14]
