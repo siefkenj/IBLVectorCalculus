@@ -1232,7 +1232,8 @@ requestion, or opening an \emph{issue} at
 			Can you pick $g$ so that $C=\{(x,y): g(x,y)=0\}$?
 		\item What is the relationship between a tangent vector to $C$ at $\vec a$ and
 			$\nabla g(\vec a)$?
-		\item If $\vec a\in C$ is a maximum, what is the relationship between 
+		\item Suppose that on the curve $C$, $f$ attains 
+			a maximum at $\vec a\in C$. What then is the relationship between 
 			$\nabla f(\vec a)$ and $\nabla g(\vec a)$?  Can you describe this relationship
 			with a formula?
 		\item Use your formula from the previous part along with the constraint $g(x,y)=0$
@@ -1293,7 +1294,7 @@ requestion, or opening an \emph{issue} at
 \subsection*{The Volume Form}
 	We've been using integrals to find the area or volume (or hypervolume) under a curve.
 	Abstractly, this process has been the same every time: chop the region into little pieces, and
-	add up each pieces contribution with an integral to find the total.  We're continuing the same
+	add up each piece's contribution with an integral to find the total.  We're continuing the same
 	process, but we're going to start chopping regions up into (sometimes) non-rectangular chunks.
 
 	\sepl
@@ -1308,23 +1309,29 @@ requestion, or opening an \emph{issue} at
 		\item Using the idea that a limit as $\Delta ?\to 0$ of a Riemann sum results in an integral, 
 			write down a double-integral expression for the area of a semicircle of radius $1$
 			in both rectangular and polar coordinates.
-		\item Let $\Delta V(r_0,\theta_0) = r_0\Delta r\Delta\theta$, and let $V(r_0,\theta_0)$ be the exact
+		\item Let $V(r_0,\theta_0) = r_0\Delta r\Delta\theta$, and let $\Delta V(r_0,\theta_0)$ be the exact
 			area of the annular (ring-shaped) section you found earlier.  What is $\displaystyle \lim_{\Delta r, \Delta\theta\to 0}
-			\frac{V(r_0,\theta_0)}{\Delta V(r_0,\theta_0)}$?  Do we need the $(\Delta r)^2\Delta \theta$ term
+			\frac{\Delta V(r_0,\theta_0)}{V(r_0,\theta_0)}$?  Do we need the $(\Delta r)^2\Delta \theta$ term
 			at infinitesimal scales?
 	\end{Enum}
 
 	\begin{Def}
-		Suppose $\mathcal F$ is a coordinate system for $\R^2$ specified by
+		Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
+		to rectangular coordinates given by 
 		$x=f_1(a,b)$ and $y=f_2(a,b)$.  The \emph{pre-volume form} associated with $\mathcal F$
 		at the point $(a,b)$ is written $\Delta V(a,b)$ and is the area between the curves
 		$a=a_0$, $a=a_0+\Delta a$, $b=b_0$, and $b=b_0+\Delta b$.
 
 		The \emph{volume form} associated with $\mathcal F$ at $(a,b)$ is the infinitesimal 
-		$\d V(a,b)$ obtained by replacing $\Delta w$ with $\d w$ and $(\Delta w)^2$ with $0$ in
+		$\d V(a,b)=V(a,b)\d a\d b$ where $V$ is the unique function satisfying
+		\[
+			\lim_{\Delta a,\Delta b\to 0} \frac{\Delta V(a,b)}{V(a,b)\Delta a\Delta b} = 1
+		\]
+		and can obtained by replacing $\Delta w$ with $\d w$ and $(\Delta w)^2$ with $0$ in
 		the pre-volume form (where $w$ stands for any variable).
 	\end{Def}
 	For coordinate systems in $\R^3$ (and $\R^n$), the volume form is defined in an analogous way.
+
 
 	\sepl
 	\begin{Enum}
@@ -1335,6 +1342,9 @@ requestion, or opening an \emph{issue} at
 		\item Let $\mathcal S$ be a stretched coordinate system.  That is, the point $(a,b)$ in
 			$\mathcal S$-coordinates corresponds to the point $(a/2, b/3)$ in rectangular 
 			coordinates.  Write down the pre-volume and volume forms for $\mathcal S$-coordinates.
+		\item Consider the set $X=\{(a,b): 0\leq b\leq a^2\text{ and }0\leq a\leq 1\}$ specified in $\mathcal S$ coordinates.
+			Draw $X$ on the $\mathcal S$-coordinate plane and in standard coordinate plane.  Then, compute
+			the area of $X$ by setting up an integral using the volume form for $\mathcal S$ coordinates.
 	\end{Enum}
 
 	\sep
@@ -1350,14 +1360,14 @@ requestion, or opening an \emph{issue} at
 
 	\sep
 	Cylindrical coordinates for $\R^3$ take the form $(r,\theta, z)$ where the
-	$x-y$ plane is specified in polar coordinates by the first two components
+	$xy$-plane is specified in polar coordinates by the first two components
 	and the height along the $z$-axis
 	is given by the third component.
 	\begin{Enum}
 		\item Compute the volume form for cylindrical coordinates.
 		\item A discuss is constructed from gluing two cones' bases together.
 			The radius of the base of each cone is $4$ and the height of each
-			cone is $1$.  Describe the surface of the discuss using polar coordinates
+			cone is $1$.  Describe the surface of the discuss using cylindrical coordinates
 			(you may need to describe the top and bottom separately)
 		\item The discuss has a density given by $\rho(x,y,z) = x^2+y^2+2|z|$.  Find the
 			mass of the discuss. (You may exploit symmetry.)
