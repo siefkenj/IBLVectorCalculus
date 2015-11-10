@@ -1,12 +1,12 @@
 \documentclass[letter]{article}
+\usepackage[charter,cal=cmcal]{mathdesign} %different font
 \usepackage[letterpaper]{geometry}
+\usepackage{microtype}
 \usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[inline]{enumitem}
-\usepackage{amsfonts}
-\usepackage{amssymb}
 \usepackage{xparse}
 \usepackage{ifthen}
 \usepackage{graphicx}
@@ -86,6 +86,7 @@
 \newcommand{\chr}{\mathrm{char}}
 \newcommand{\url}[1]{#1}
 \renewcommand{\d}{\mathrm{d}}
+
 
 %%%
 % Create a command that draws a horizontal line extending into the margin.
@@ -177,7 +178,7 @@
 \pagestyle{empty}
 
 \begin{center}
-{\huge\bf Inquiry Based Linear Algebra}\\
+{\huge\bf Inquiry Based Vector Calculus}\\
 
 \vspace{.7in}
 {
@@ -1373,6 +1374,72 @@ requestion, or opening an \emph{issue} at
 			mass of the discuss. (You may exploit symmetry.)
 	\end{Enum}
 
+\newpage
+\section*{Surface Integrals}
+	We've done line integrals, which were adding up the values of a function along a curve.
+	Now we're going to do the same thing with surfaces.
+
+	\sepl
+	\begin{Enum}
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1)$ and $\vec b=(4,0)$.
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1,0)$ and $\vec b=(4,0,4)$.
+		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(1,2,3)$ and $\vec b=(2,1,-1)$.
+	\end{Enum}
+
+	\sep
+	Let $\mathcal S\subset \R^3$ be a surface and let $f:\mathcal S\to \R$ be a function.
+	\begin{Enum}
+		\item Think of two examples of surfaces $\mathcal S$ and functions $f$ that correspond
+			to the world you live in.
+		\item We'd like to add up (integrate) the values of $f$ over the surface $\mathcal S$.  Explain
+			how a Riemann sum can help us do this.
+		\item Suppose that $r(a,b)$ for $0\leq a\leq 2$ and $-1\leq b\leq 1$ is an isometric
+			parameterization of $\mathcal S$ (i.e., $r$ preserves area).  Write down
+			an iterated integral to compute $\displaystyle \int_{\mathcal S} f$ with respect
+			to surface area.
+		\item Suppose that $q(\alpha,\beta)$ for $-3\leq \alpha\leq 0$ and $5\leq \beta\leq 6$
+			is a non-isometric parameterization of $\mathcal S$.  However,
+			you also know that if $R\subset \R^2$ is a rectangle with side lengths $\Delta\alpha$
+			and $\Delta\beta$ and lower-left corner $(\alpha,\beta)$, then $q(R)$ has surface area
+			$Q(\alpha,\beta)\Delta \alpha\Delta\beta$.  Set up an iterated integral to compute
+			$\displaystyle \int_{\mathcal S} f$ with respect
+			to surface area using $q$ and $Q$.  Justify your intuition with an explanation in
+			terms of Riemann sums.
+	\end{Enum}
+
+	In the previous problem, $Q$ looked a lot like a volume form, but finding it from first principles
+	is hard!  Instead, we'll develop intuition and a formula for $Q$ using tangent planes.
+
+	\sep
+	\vspace{-.3cm}
+	Suppose $\mathcal P\subset \R^3$ is a plane with parameterization $p(t,s) = t\mat{1\\2\\3} + s\mat{1\\1\\1}$.
+	\begin{Enum}
+		\item Suppose $R_{(t_0,s_0)}\subset \R^2$ is a rectangle with lower left corner at $(t_0,s_0)$ and 
+			sides of length $\Delta t$ and $\Delta s$.  Find a function $Q$ so that $Q(t,s) =\text{area of }p(R_{(t_0,s_0)})$.
+			Does $Q$ depend on $t_0$ and $s_0$?  Does this make sense?
+		\item Consider the new parameterization $\tilde p$ given by $\tilde p(t,s) = p(t^2,s)$.  What does
+			$\tilde p$ parameterize?  How does it relate to $\mathcal P$?
+		\item Let $R_{(t_0,s_0)}$ be a rectangle as before.  Find a function $\tilde Q$ so that
+			$\tilde Q(t,s) =\text{area of }\tilde p(R_{(t_0,s_0)})$.  Does $\tilde Q$ depend on
+			$(t_0,s_0)$?
+		\item Find a function $V(t,s)$ so that $\displaystyle\lim_{\Delta t,\Delta s\to 0} \frac{\tilde Q(t,s)}{V(t,s)\Delta t\Delta s}
+			=1$.  Does $V$ remind you of anything?
+	\end{Enum}
+
+	Given a surface $\mathcal S$ parameterized by $r(t,s)$, there is a canonical way to write vector form
+	of the tangent plane to $\mathcal S$ at the point $(t,s,r(t,s))$ by using the directional derivatives
+	of $r$ in the $t$ direction and the $s$ direction as two direction vectors for your plane.
+	
+	\sep
+	Consider the surface $\mathcal S$ parameterized by $(t,s,r(t,s))$ where $r(t,s) = t^2+s^2$ and $0\leq t\leq 1$ and $0\leq s\leq 1$.
+	\begin{Enum}
+		\item Find the canonical representation of the tangent plane to $\mathcal S$ at the point
+			$(t_0,s_0)$.
+		\item Let $R_{(t_0,s_0)}$ be a rectangle with lower left corner $(t_0,s_0)$ and sides of 
+			very short lengths $\Delta t$ and $\Delta s$.  Describe the set $I_{(t_0,s_0)}=\{(a,b,r(a,b)): (a,b)\in R_{(t_0,s_0)}\}$.
+		\item Give an estimation of the surface area of $I_{(t_0,s_0)}$.  What assumptions are you making?
+		\item Write down an integral to compute the surface area $\mathcal S$.
+	\end{Enum}
 
 %\begin{tikzpicture}
 %	\begin{axis}[view/az=14]
