@@ -1522,7 +1522,7 @@ requestion, or opening an \emph{issue} at
 			P\Big( (\sqrt{2}/2,0,\sqrt{2}/2), (0,1,0) \Big)$
 		\item Compute the flux through a box with side-lengths of one which
 			is parallel to the $xz$-plane and meets the $xy$-plane at an
-			angle of $\pi/4$.
+			angle of $\pi/4$ and whose faces are oriented outwards.
 		\item If $\mathcal S$ is a closed surface (i.e., $\mathcal S$ encloses
 			a region and has no holes), what is the flux of
 			$\vec f$ through $\mathcal S$?  Would your
@@ -1550,7 +1550,7 @@ requestion, or opening an \emph{issue} at
 	\sep
 	Let $C_{\Delta x,\Delta y,\Delta z}$ be the box with side lengths
 	$\Delta x$, $\Delta y$, $\Delta z$, parallel to the $xy$ and $xz$ planes
-	and with lower left corner at $\vec 0$.  Assume each face of the cube is
+	and with lower left corner at $\vec 0$.  Assume each face of the box is
 	oriented outwards.
 	Let $\vec f:\R^3\to\R^3$ be
 	a vector field.
@@ -1598,8 +1598,8 @@ requestion, or opening an \emph{issue} at
 \subsection*{Divergence}
 \vspace{-1cm}
 	\begin{Def}
-		Given a volume or area (or line segment) $V$, the \emph{boundary} of $V$
-		is denoted $\partial V$ and is assumed to have an outwards orientation.
+		Given a volume or area $V$, the \emph{boundary} of $V$
+		is denoted $\partial V$ and is assumed to have an outwards or counter clockwise orientation.
 	\end{Def}
 
 	\begin{Def}
@@ -1634,7 +1634,7 @@ requestion, or opening an \emph{issue} at
 			to motivate the divergence theorem.
 	\end{Enum}
 
-	\vspace{-.3cm}
+	\vspace{-.5cm}
 \subsection*{Curl}
 
 \vspace{-.3cm}
@@ -1645,7 +1645,7 @@ requestion, or opening an \emph{issue} at
 	$\vec x\in\R^3$ and interpreted $\vec f$ as the velocity of a fluid, the sphere might
 	start spinning, and this spinning is exactly what curl measures.  
 
-	\vspace{-.5cm}
+	\vspace{-.6cm}
 	\begin{Def}
 		An isometric parameterization $\vec p:\R^3\to\R^3$ is called an \emph{isometry}.
 		An isometry $\vec r:\R^3\to\R^3$ is called a \emph{rotation} if $\vec r(0,0,0)=(0,0,0)$
@@ -1656,11 +1656,12 @@ requestion, or opening an \emph{issue} at
 	\end{Def}
 
 	Amazingly (though maybe you're used to this) any non-trivial rotation has exactly one axis of rotation!
-	This is something very special about 3d space (and it's not true in 4d and higher)!  
+	This is something very special about 3D space (and it's not true in 4D and higher)!  
 	Further, a non-trivial rotation $\vec r$ can be described
 	by its axis of rotation, the magnitude of the rotation, and the attribute of clockwise or counterclockwise.
 
-	Another amazing coincidence of 3d space is that we can encode all of this information in a single vector.
+	Another amazing coincidence of 3D space (following from the first coincidence) 
+	is that we can encode all of this information in a single vector.
 	Let $\vec r:\R^3\to \R^3$ be a rotation and let $\vec u$ be a unit vector in the direction of $\vec r$'s 
 	axis of rotation.  We can describe $\vec r$ by the vector $\alpha \vec u$ where $|\alpha|$ is the magnitude
 	of the rotation (i.e., the number of radians $\vec r$ rotates by), and the sign of $\alpha$ is positive
@@ -1669,7 +1670,7 @@ requestion, or opening an \emph{issue} at
 
 	\sep
 	For each of the following rotations in $\R^3$, write down its representation as a vector.
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 	\begin{Enum}
 		\item Rotation of the $xy$ plane counterclockwise by $\pi/3$.
 		\item Rotation of the $xy$ plane clockwise by $\pi/3$.
@@ -1701,11 +1702,7 @@ requestion, or opening an \emph{issue} at
 			about a theorem of similar form to the divergence theorem but for curl.
 	\end{Enum}
 
-%		\begin{align}
-%			R^{\xh}_{\Delta a,\Delta b}(x,y,z) &= \{x\}\times[y,y+\Delta a]\times [z,z+\Delta b],\\
-%			R^{\yh}_{\Delta a,\Delta b}(x,y,z) &= [x,x+\Delta a]\times \{y\}\times [z,z+\Delta b], \text{ and }\\
-%			R^{\zh}_{\Delta a,\Delta b}(x,y,z) &= [x,x+\Delta a]\times [y,y+\Delta b]\times \{z\}.
-%		\end{align}
+	\vspace{-1cm}
 	\begin{Def}
 		Let $R^{\vec v} (x,y,z)$ be a rectangle with side lengths $\Delta a$ and $\Delta b$, corner through
 		$(x,y,z)$, and with normal
@@ -1720,7 +1717,46 @@ requestion, or opening an \emph{issue} at
 
 		The \emph{curl} of $\vec f$ at the point $(x,y,z)$ is the vector, notated $\nabla \times \vec f(x,y,z)$, so that
 		$(\nabla \times \vec f(x,y,z))\cdot \frac{\vec v}{\|\vec v\|} = {\mathrm curl}_{\vec v}(\vec f)$.
-		
+	\end{Def}
+
+	Computing curl from the definition each time can be cumbersome, so let's see
+	if there's a formula.
+	
+	\sep
+	Let $\vec f:\R^3\to\R^3$ be a vector field.
+	\begin{Enum}
+		\item Write down the definition
+			for the $\hat x$, $\hat y$, and $\hat z$ components of the curl of $\vec f$.
+			Do you see anything that looks like a derivative?
+		\item Does the notation $\nabla \times \vec f(x,y,z)$ make sense for the curl of
+			$\vec f$ at a point?  Explain.
+	\end{Enum}
+
+	\sep
+	Let $\vec f:\R^3\to\R^3$ be a vector field and let $g:\R^3\to \R$ be a scalar field.
+	\begin{Enum}
+		\item What is the curl of the gradient of $g$?
+		\item What is the divergence of the curl of $\vec f$?  Does it
+			make sense to take the curl of the divergence of $\vec f$?
+		\item Could the vector field $\vec h(x,y,z) = (x,y,z)$ be the curl
+			of $\vec f$?
+	\end{Enum}
+
+	\vspace{-1cm}
+	\begin{Def}
+		Let $\vec f:\R^3\to\R^3$ be a vector field, and let $\mathcal S$ be a surface.
+		\emph{Stokes's theorem} says that the work done by $\vec f$ on a particle traversing 
+		$\partial \mathcal S$ is equal to the flux of $\nabla \times \vec f$ through $\mathcal S$.
+		That is,
+		\[
+			\int_{\partial \mathcal S} \vec f\cdot \hat r\,\d V_{\partial \mathcal S}
+			= \iint_{\mathcal S} (\nabla \times \vec f)\cdot \hat n\,\d V_{\mathcal S},
+		\]
+		where $\hat r$ is a unit tangent vector to $\partial \mathcal S$, $\hat n$ is a unit
+		normal vector to $\mathcal S$, $\d V_{\partial \mathcal S}$ is the volume form
+		for $\partial \mathcal S$ (in this case, it's the arc-length form), and 
+		$\d V_{\mathcal S}$ is the volume form for $\mathcal S$.
+
 	\end{Def}
 
 
