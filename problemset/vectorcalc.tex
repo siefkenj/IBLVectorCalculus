@@ -1,6 +1,12 @@
-\documentclass[letter]{article}
+\documentclass{problemset}
+\usepackage{amsmath}
+
+\usepackage{lipsum}
+%\usepackage{showframe}
+\usepackage{layout}
+
+
 \usepackage[charter,cal=cmcal]{mathdesign} %different font
-\usepackage[letterpaper]{geometry}
 \usepackage{microtype}
 \usepackage{amsmath}
 %\usepackage{amsfonts}
@@ -16,49 +22,10 @@
 \usepackage{tikz}
 \usepackage{fancyhdr}
 \usepackage{calc}
+\usepackage[hidelinks]{hyperref}
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
-%\usepackage[hidelinks]{hyperref}
-%\usepackage{wrapfig}
-
-
-%%%
-% Set up the margins to use a fairly large area of the page
-%%%
-\oddsidemargin=.2in
-\evensidemargin=.2in
-\textwidth=6in
-\topmargin=-1.2in
-\textheight=9.8in
-\parskip=.07in
-\parindent=0in
-
-%%%
-% Make the copyright notice appear in the footer
-%%%
-\pagestyle{fancy}
-\rfoot{\footnotesize\it \copyright\,Jason Siefken, 2015 \ \makebox(30,5){\includegraphics[height=1.2em]{by-sa.pdf}}}
-\renewcommand{\headrulewidth}{0pt}
-
-%%%
-% Custom enumerate environment Enum
-% that incriments the problem number every time it is used.
-%%%
-\newcounter{EnumPrefix}
-\newcounter{EnumSuffix}
-\DeclareDocumentEnvironment{Enum}{o}{
-	\ifthenelse{ \equal{#1}{resume} }{
-		\begin{enumerate}[label={\footnotesize\arabic{EnumPrefix}}.\arabic*]
-		\setcounter{enumi}{\value{EnumSuffix}}
-	}{
-		\stepcounter{EnumPrefix}\begin{enumerate}[label={\footnotesize\arabic{EnumPrefix}}.\arabic*]
-	}
-}{
-	\setcounter{EnumSuffix}{\value{enumi}}
-	\end{enumerate}
-}
-
 %%%
 % Useful Linear Algebra macros
 %%%
@@ -84,68 +51,21 @@
 \newcommand{\nnul}{\mathrm{nullity}}
 \newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\chr}{\mathrm{char}}
-\newcommand{\url}[1]{#1}
 \renewcommand{\d}{\mathrm{d}}
 
-
-%%%
-% Create a command that draws a horizontal line extending into the margin.
-% If no argument is given, it prints the current problem number.
-% Otherwise the argument is displayed (including a blank argument)
-%%%
-
-%\definecolor{barcolor}{rgb}{.2,.6,1.0}  % medium blue
-\definecolor{barcolor}{rgb}{.1,.4,.5} % dark blue
-\NewDocumentCommand{\sep}{o}{%
-	\makebox(0,0){%
-		\vspace{.1in}
-		\hspace{-1.0in}
-		\color{barcolor}{
-			\makebox(0,10)[l]{\rule{1.4in}{.25pt}}
-			\IfNoValueTF{#1}{
-				\stepcounter{EnumPrefix}
-				\makebox(0,0)[lt]{\arabic{EnumPrefix}}
-				\addtocounter{EnumPrefix}{-1}
-			}{
-				\makebox(0,0)[lt]{\emph{#1}}
-			}
-		}
-}\\*[0pt]}
-% a \sep command to be used before a list.  Remove the extra spacing...
-\newcommand{\sepl}{\sep \vspace{-.35in}}
-
-\definecolor{defcolor}{rgb}{.05,.4,.15}
-\newsavebox{\fminipagebox}
-\newlength{\currentparskip}
-\NewDocumentEnvironment{Def}{O{\fboxsep}}
- {
-	 \renewcommand{\emph}[1]{{\color{defcolor} \textbf{\textit{##1}}}}
- 	\setlength{\currentparskip}{\parskip}
-	\makebox(0,0){%
-			\vspace{.0in}
-			\hspace{-.9in}
-			\color{defcolor}{
-				\makebox(0,-12)[lt]{\bf{Def}}
-			}
-	}
- \par\kern#1\noindent\begin{lrbox}{\fminipagebox}
-  \begin{minipage}{\textwidth}\ignorespaces%
-  \setlength{\parskip}{.4em}
-}
- {\end{minipage}\end{lrbox}%
-  \makebox[\textwidth]{%
-    \kern\dimexpr-\fboxsep-\fboxrule\relax
-    \fbox{\usebox{\fminipagebox}}%
-    \kern\dimexpr-\fboxsep-\fboxrule\relax
-  }\par\kern#1
-  \setlength{\parskip}{\currentparskip}
- }
-
+%\tcbuselibrary{skins}
+%\usetikzlibrary{shadings}
 
 
 %%%
-% Start the document!
+% Set up the margins to use a fairly large area of the page
 %%%
+\textwidth=6in
+\topmargin=-1in
+\textheight=10in
+\parskip=.07in
+\parindent=0in
+
 \begin{document}
 \pagestyle{empty}
 
@@ -160,60 +80,61 @@ Creative Commons By-Attribution Share-Alike\, \makebox(30,5){\includegraphics[he
 \end{center}
 
 \section*{About the Document}
-This document was originally designed in the fall of 2015 to guide students
-through an eleven week Vector Calculus course (Math 281-1) at
-Northwestern University.  
 
-A typical class day using the problem-sets:
-\begin{enumerate}
-	\item {\bf Introduction by instructor.} This may involve giving a definition,
-		a broader context for the day's topics, or answering questions.
-	\item {\bf Students work on problems.} Students work individually or in pairs
-		on the prescribed problem.  During this time the instructor moves around
-		the room addressing questions that students may have and giving one-on-one
-		coaching.
-	\item {\bf Instructor intervention.} If most students have successfully solved the 
-		problem, the instructor regroups the class by providing a concise 
-		explanation so that everyone is ready to move to the next concept.  This
-		is also time for the instructor to ensure that everyone has understood the
-		main point of the exercise (since it is sometimes easy to do some computation
-		while being oblivious to the larger context).
+	This document was originally designed in the fall of 2015 to guide students
+	through an eleven week Vector Calculus course (Math 281-1) at
+	Northwestern University.  
 
-		If students are having trouble, the instructor can give hints to the group,
-		and additional guidance to ensure the students don't get frustrated
-		to the point of giving up.
-	\item {\bf Repeat step 2.}
-\end{enumerate}
+	A typical class day using the problem-sets:
+	\begin{enumerate}
+		\item {\bf Introduction by instructor.} This may involve giving a definition,
+			a broader context for the day's topics, or answering questions.
+		\item {\bf Students work on problems.} Students work individually or in pairs
+			on the prescribed problem.  During this time the instructor moves around
+			the room addressing questions that students may have and giving one-on-one
+			coaching.
+		\item {\bf Instructor intervention.} If most students have successfully solved the 
+			problem, the instructor regroups the class by providing a concise 
+			explanation so that everyone is ready to move to the next concept.  This
+			is also time for the instructor to ensure that everyone has understood the
+			main point of the exercise (since it is sometimes easy to do some computation
+			while being oblivious to the larger context).
 
-Using this format, students are working (and happily so) most of the class.
-Further, they are especially primed to hear the insights of the instructor, 
-having already invested substantially into each problem.
+			If students are having trouble, the instructor can give hints to the group,
+			and additional guidance to ensure the students don't get frustrated
+			to the point of giving up.
+		\item {\bf Repeat step 2.}
+	\end{enumerate}
 
-This problem-set is geared towards concepts instead of computation, though some problems
-focus on simple computation.
+	Using this format, students are working (and happily so) most of the class.
+	Further, they are especially primed to hear the insights of the instructor, 
+	having already invested substantially into each problem.
 
-{\bf License}  This document is licensed under the Creative Commons
-By-Attribution Share-Alike License.  That means, you are free to use,
-copy, and modify this document provided that you provide attribution
-to the previous copyright holders and you release your derivative work 
-under the same license.  Full text of the license is at \url{http://creativecommons.org/licenses/by-sa/4.0/}
+	This problem-set is geared towards concepts instead of computation, though some problems
+	focus on simple computation.
 
-If you modify this document, you may add your name to the copyright list.  Also,
-if you think your contributions would be helpful to others, consider making a pull
-requestion, or opening an \emph{issue} at 
-\url{https://github.com/siefkenj/IBLLinearAlgebra}
+	{\bf License}  This document is licensed under the Creative Commons
+	By-Attribution Share-Alike License.  That means, you are free to use,
+	copy, and modify this document provided that you provide attribution
+	to the previous copyright holders and you release your derivative work 
+	under the same license.  Full text of the license is at \url{http://creativecommons.org/licenses/by-sa/4.0/}
+
+	If you modify this document, you may add your name to the copyright list.  Also,
+	if you think your contributions would be helpful to others, consider making a pull
+	requestion, or opening an \emph{issue} at 
+	\url{https://github.com/siefkenj/IBLVectorCalculus}
 
 
-%%%
-% Start the Math!
-%%%
 \newpage
+
 \setcounter{page}{1}
 \pagestyle{fancy}
+\rfoot{\footnotesize\it \copyright\,Jason Siefken, 2015 \ \makebox(30,5){\includegraphics[height=1.2em]{by-sa.pdf}}}
+\renewcommand{\headrulewidth}{0pt}
 
 \section*{Vectors}
 
-	\sep
+	\question
 	\begin{tikzpicture}[>=latex,scale=4]
 		\draw[style=help lines] (0,0) (2,2);
 
@@ -230,7 +151,7 @@ requestion, or opening an \emph{issue} at
 
 	Notice that all arrows in this diagram are the same length.
 	We will call this length a \emph{unit}.
-	\begin{Enum}
+	\begin{parts}
 		\item Give directions from $\bf o$ to $p$ of
 		the form ``Walk \ul units in the direction of arrow \ul, then 
 		walk \ul units in the direction of arrow \ul.''
@@ -243,10 +164,9 @@ requestion, or opening an \emph{issue} at
 		\item Can you give directions from $\bf o$ to $q$ using $\bf c$ and $\bf a$?
 		Give such directions, or explain why it cannot be done.
 
-	\end{Enum}
-	
+	\end{parts}
 
-	\sep
+	\question
 	\begin{minipage}{.35\textwidth}
 	\begin{tikzpicture}[>=latex,scale=4]
 		\draw[style=help lines] (0,0) (1,2);
@@ -269,7 +189,7 @@ requestion, or opening an \emph{issue} at
 	which is read as ``To get to $p$ (=) go \ul units in the direction $\xh$ then (+) go \ul units in 
 	the direction $\yh$.''
 
-	\begin{Enum}
+	\begin{parts}
 		\item What is the difference between $p = \ull\, \xh + \ull\, \yh$ and $p = \ull\, \yh + \ull\, \xh$?
 		Can they both give valid directions?
 		\item
@@ -288,7 +208,7 @@ requestion, or opening an \emph{issue} at
 			\item $q=-2\xh+3\yh$; find the exact distance from $\bf o$ to $q$.
 			\item $s=2\xh+\bf c$; find the exact distance from $\bf o$ to $s$.
 		\end{enumerate}
-	\end{Enum}
+	\end{parts}
 	\end{minipage}
 
 
@@ -305,15 +225,15 @@ requestion, or opening an \emph{issue} at
 	we emphasize that $q$ is some absolute location in space. (What's the philosophical
 	difference between a location in space and directions from the origin to said location?)
 
-	\sep 
+	\question 
 	$r=1\bf c$ and $s=2\xh+\bf c$ where $\bf c$ is the vector from before.
-	\begin{Enum}
+	\begin{parts}
 		\item Write $r$ and $s$ in column vector form.
-	\end{Enum}
+	\end{parts}
 
 \section*{Sets and Set Notation}
 
-	\begin{Def}
+	\begin{definition}[Set]
 		A \emph{set} is a (possibly infinite) collection of items
 		and is notated with curly braces (for example, $\{1,2,3\}$ is
 		the set containing the numbers 1, 2, and 3).  We call the items in
@@ -334,22 +254,21 @@ requestion, or opening an \emph{issue} at
 		involving $a$ is true.''  If $X$ is intuitive, we may omit it and
 		simply write $Y=\{a:\text{some rule involving }a\}$.  You may equivalently
 		use ``$|$'' instead of ``$:$'', writing $Y=\{a\,|\,\text{some rule involving }a\}$.
-	\end{Def}
+	\end{definition}
 
-	\begin{Def}
+	\begin{definition}
 		Some common sets are
-		\vspace{-1em}
 		\begin{itemize}
 			\item[] $\N=\{\text{natural numbers}\} = \{\text{non-negative whole numbers}\}$.
 			\item[] $\Z=\{\text{integers}\} = \{\text{whole numbers, including negatives}\}$.
 			\item[] $\R=\{\text{real numbers}\}$.
 			\item[] $\R^n=\{\text{vectors in $n$-dimensional Euclidean space}\}$.
 		\end{itemize}
-	\end{Def}
+	\end{definition}
 
-	\sep
-	\vspace{-2em}
-	\begin{Enum}
+
+	\question
+	\begin{parts}
 		\item Which of the following are true?
 		\begin{enumerate}
 			\item $3\in\{1,2,3\}$.
@@ -363,17 +282,17 @@ requestion, or opening an \emph{issue} at
 			\item $\{1,2,3\}=\{x\in\R:1\leq x\leq 3\}$.
 			\item $\{1,2,3\}=\{x\in\Z:1\leq x\leq 3\}$.
 		\end{enumerate}
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 		Write the following in set-builder notation
-	\begin{Enum}
+	\begin{parts}
 			\item The subset $A\subseteq \R$ of real numbers larger than $\sqrt{2}$.
 			\item The subset $B\subseteq \R^2$ of vectors whose first coordinate
 			is twice the second.
-	\end{Enum}
+	\end{parts}
 
-	\begin{Def}
+	\begin{definition}[Unions \& Intersections]
 		Two common set operations are \emph{unions} and \emph{intersections}.  
 		Let $X$ and $Y$ be sets.
 
@@ -383,34 +302,32 @@ requestion, or opening an \emph{issue} at
 			\item[(intersection)] $X\cap Y = \{a: a\in X\text{ and }a\in Y\}$.
 		\end{itemize}
 		\end{minipage}
-	\end{Def}
+	\end{definition}
 
-	\sep
+	\question
 	Let $X=\{1,2,3\}$ and $Y=\{2,3,4,5\}$ and $Z=\{4,5,6\}$.  Compute
-	\begin{Enum}
+	\begin{parts}
 		\item $X\cup Y$
 		\item $X\cap Y$
 		\item $X\cup Y\cup Z$
 		\item $X\cap Y\cap Z$
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Draw the following subsets of $\R^2$.
-	\begin{Enum}
+	\begin{parts}
 		\item $V=\left\{\vec x\in\R^2:\vec x=\begin{bmatrix}0\\t\end{bmatrix}\text{ for some }t\in\R\right\}$.
 		\item $H=\left\{\vec x\in\R^2:\vec x=\begin{bmatrix}t\\0\end{bmatrix}\text{ for some }t\in\R\right\}$.
 		\item $J=\left\{\vec x\in\R^2:\vec x=t\begin{bmatrix}1\\1\end{bmatrix}\text{ for some }t\in\R\right\}$.
 		\item $V\cup H$.
 		\item $V\cap H$.
 		\item Does $V\cup H=\R^2$?
-	\end{Enum}
-
+	\end{parts}
 
 
 \section*{Dot Product}
-	\vspace{-1cm}
 
-	\begin{Def}
+	\begin{definition}[Dot Product]
 	If $\vec a=\begin{bmatrix}a_1\\ a_2\\ \vdots \\ a_n\end{bmatrix}$ and 
 	$\vec b=\begin{bmatrix}b_1\\ b_2\\ \vdots \\ b_n\end{bmatrix}$ are two vectors in $n$-dimensional
 		space, then the \emph{dot product} of $\vec a$ an $\vec b$ is
@@ -422,13 +339,11 @@ requestion, or opening an \emph{issue} at
 		\vec a\cdot \vec b = \|\vec a\|\|\vec b\|\cos \theta
 	\]
 	where $\theta$ is the angle between $\vec a$ and $\vec b$.
-	\end{Def}
+	\end{definition}
 	
-	\pagebreak
-	\sep
+	\question
 		Let $\vec a=\begin{bmatrix}1\\1\end{bmatrix}$, $\vec b=\begin{bmatrix}3\\2\end{bmatrix}$, and $\vec u=\begin{bmatrix}1\\2\\1\end{bmatrix}$.
-	\vspace{-.5cm}
-	\begin{Enum}
+	\begin{parts}
 		\item 
 		\begin{enumerate}	
 			\item Draw a picture of $\vec a $ and $\vec b$.
@@ -458,20 +373,18 @@ requestion, or opening an \emph{issue} at
 			\item Can you write down other vectors different than both $\vec v$ and $\vec w$ that still
 			form an angle of $\pi/2$ with $\vec u$?  How many such vectors are there?
 		\end{enumerate}
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.7cm}
-	\begin{Def}
+	\begin{definition}[Norm]
 		The \emph{norm} of a vector $\vec v\in\R^n$, denoted $\|\vec v\|$ is its length
 		and is given by the formula
 		\[
 			\|\vec v\| = \sqrt{\vec v\cdot\vec v}.
 		\]
-	\end{Def}
+	\end{definition}
 
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Let $\vec a = \mat{3\\2}$.  Find $\|\vec a\|$ using the Pythagorean theorem
 			and using the formula from the definition of the norm.  How do
 			these quantities relate?
@@ -481,53 +394,49 @@ requestion, or opening an \emph{issue} at
 		\item Suppose $\vec u=\mat{x\\ y}$ for some $x,y\in \R$.
 		Could $\vec u\cdot \vec u$ be negative? Compute $\vec u\cdot \vec u$ algebraically
 		and use this to justify your answer.
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.7cm}
-	\begin{Def}
+	\begin{definition}[Distance]
 		The \emph{distance} between two vectors $\vec u$ and $\vec v$ is $\|\vec u-\vec v\|$.
-	\end{Def}
-	\vspace{-.5cm}
-	\begin{Def}
+	\end{definition}
+	\begin{definition}[Unit Vector]
 		A vector $\vec v$ is called a \emph{unit vector} if $\|\vec v\|=1$.
-	\end{Def}
+	\end{definition}
 	
-	\sep
+	\question
 	Let $\vec u=\mat{1\\2\\1}$ and $\vec v=\mat{1\\1\\3}$.
-	\vspace{-.2cm}
-	\begin{Enum}
+	\begin{parts}
 		\item Find the distance between $\vec u$ and $\vec v$.
 		\item Find a unit vector in the direction of $\vec u$.
 		\item Does there exists a \emph{unit vector} $\vec x$ that is distance
 			$1$ from $\vec u$?
 		\item Suppose $\vec y$ is a unit vector and the distance between $\vec y$ and
 			$\vec u$ is $2$.  What is the angle between $\vec y$ and $\vec u$?
-	\end{Enum}
+	\end{parts}
 
-	\begin{Def}
+	\begin{definition}[Orthogonal]
 		Two vectors $\vec u$ and $\vec v$ are \emph{orthogonal} to each other
 		if $\vec u\cdot \vec v=0$.  The word orthogonal is synonymous with the
 		word perpendicular.
-	\end{Def}
+	\end{definition}
 
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+	\newpage
+	\question
+	\begin{parts}
 		\item Find two vectors orthogonal to $\vec a=\mat{1\\-3}$.  Can you find two such vectors that
 			are not parallel?
 		\item Find two vectors orthogonal to $\vec b=\mat{1\\-3\\4}$.  Can you find two 
 			such vectors that are not parallel?
 		\item Suppose $\vec x$ and $\vec y$ are orthogonal to each other and $\|\vec x\|=5$ and $\|\vec y\|=3$.
 			What is the distance between $\vec x$ and $\vec y$?
-	\end{Enum}
+	\end{parts}
 
 
 \section*{Projections}
 	Projections (sometimes called orthogonal projections) are a way to measure how much one vector
 	points in the direction of another.
 
-	\vspace{-.8cm}
-	\begin{Def}
+	\begin{definition}[Projection]
 	\begin{center}
 	\usetikzlibrary{patterns,decorations.pathreplacing}
 	\begin{tikzpicture}[>=latex,scale=2.5]
@@ -547,10 +456,9 @@ requestion, or opening an \emph{issue} at
 	The \emph{projection} of $\vec u$ onto $\vec v$ is written $\proj_{\vec v}\vec u$ and is the vector in the direction of $\vec v$
 	such that $\vec u-\Proj_{\vec v}\vec u$ is orthogonal to $\vec v$.  The vector $\vec u-\Proj_{\vec v}$ is called the \emph{perpendicular
 	component} of $\vec u$ with respect to $\vec v$ and is notated as $\Perp_{\vec v}\vec u$.
-	\end{Def}
+	\end{definition}
 	
-	\sep
-	\vspace{-1cm}
+	\question
 	\begin{center}
 	\usetikzlibrary{patterns,decorations.pathreplacing}
 	\begin{tikzpicture}[>=latex,scale=2.5]
@@ -561,11 +469,12 @@ requestion, or opening an \emph{issue} at
 	\end{tikzpicture}
 	\end{center}
 
+
 	In this picture $\|\vec a\|=4$, $\theta = \pi/6$, and $\vec b=\mat{6\\0}$.
 	%%%
 	% XXX: This is confusing with multiple b vectors. Should instead emphasise that proj_b(a ) = proj_{-b}(a).
 	%%%
-	\begin{Enum}
+	\begin{parts}
 		\item   Write $\vec a$ in column vector form.
 		\item   Find $\|\Proj_{\vec b}\vec a\|$ and $\|\Perp_{\vec b}\vec a\|$.
 		\item Write down 
@@ -581,43 +490,43 @@ requestion, or opening an \emph{issue} at
 		\item Consider $\vec d=\mat{3\\1}$.  Compute $\proj_{\xh}\vec d$ and 
 		$\proj_{\yh}\vec d$.  How do these projections relate to the coordinates of $\vec d$? What
 		can you say in general about projections onto $\xh$ and $\yh$?
-	\end{Enum}
-	
-\newpage
+	\end{parts}
+
+
 \section*{Lines, Planes, Normals, and Equations}
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+
+	\question
+	\begin{parts}
 		\item Draw $\vec u=\begin{bmatrix}2\\3\end{bmatrix}$ and \emph{all}
 		vectors perpendicular to it.
 		\item If $\vec x=\begin{bmatrix}x\\y\end{bmatrix}$ and $\vec x$ is 
 		perpendicular to $\vec u$, what is $\vec x\cdot \vec u$?
 		\item Expand the dot product $\vec u\cdot \vec x$ to get an equation
 		for a line.  This equation is called the \emph{scalar equation} representing the line.
-	\end{Enum}
+	\end{parts}
 
-	\begin{Def}
+	\begin{definition}[Normal Vector]
 		A \emph{normal vector} to a line (or plane or hyperplane) is a non-zero vector that is orthogonal to it.
-	\end{Def}
+	\end{definition}
 
-	\begin{Enum}[resume]
+	\begin{parts}[resume]
 		\item Rewrite the line $\vec u\cdot \vec x = 0$ in $y=mx+b$ form and verify it matches
 		the line you drew above.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	We can also write a line in \emph{parametric form} by introducing a parameter
 	that traces out the line as the parameter runs over all real numbers.
-	\begin{Enum}
+	\begin{parts}
 		\item Draw the line $L$ with $x,y$ coordinates given by
 		\[
 			\begin{array}{l}x=t\\y=2t\end{array}
 		\]
 		as $t$ ranges over $\R$.
 		\item Write the line $\vec u \cdot \vec x=0$ (where $\vec u$ is the same as before) in parametric form.
-	\end{Enum}
+	\end{parts}
 	
-	\sep
+	\question
 	\emph{Vector form} is the same as parametric form but written in vector notation.  For example, the
 	line $L$ from earlier could be written as 
 	\[
@@ -628,7 +537,7 @@ requestion, or opening an \emph{issue} at
 		\begin{bmatrix}x\\y\end{bmatrix}=t\begin{bmatrix}1\\2\end{bmatrix}.
 	\]
 
-	\begin{Enum}
+	\begin{parts}
 		\item Write the line $\vec u\cdot \vec x=0$ in vector form.  That is, find a vector $\vec v$ so
 		the line $\vec u\cdot \vec x=0$  can be written as
 		\[
@@ -636,15 +545,13 @@ requestion, or opening an \emph{issue} at
 		\]
 		as $t$ ranges over $\R$.
 		\item What is $\vec v\cdot \vec u$? Why? Will this always happen?
-	\end{Enum}
+	\end{parts}
 
-\newpage
 
 	\subsection*{Moving to Planes}
 	
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Write down three solutions $\vec a$, $\vec b$, $\vec c\in\R^3$ to
 		\begin{equation}\label{eq1}
 			2x+y-z=0.
@@ -652,13 +559,13 @@ requestion, or opening an \emph{issue} at
 		\item Find $\vec n\in\R^3$ so that equation (\ref{eq1}) is equivalent
 		to $\vec n\cdot \vec x=0$ where $\vec x=\begin{bmatrix}x\\ y\\ z\end{bmatrix}$.
 		\item What do you notice about the angle between solutions to equation (\ref{eq1}) and $\vec n$?
-	\end{Enum}
+	\end{parts}
 
 	When writing down solutions to equation (\ref{eq1}), you got to choose two coordinates before the remaining
 	coordinate became determined.  This means the solutions have two parameters (and consequently form a
 	two dimensional space).
 
-	\begin{Enum}[resume]
+	\begin{parts}[resume]
 		\item Write down parametric form of a line of solutions to equation (\ref{eq1}).
 		\item Write down parametric form of a different line of solutions to equation (\ref{eq1}).
 		\item Write down all solutions to equation (\ref{eq1}) in parametric form.  That is, find $a_x,
@@ -672,7 +579,7 @@ requestion, or opening an \emph{issue} at
 		\]
 		gives all solutions as $t,s$ vary over all of $\R$.
 		\item Write all solutions to equation (\ref{eq1}) in vector form.
-	\end{Enum}
+	\end{parts}
 
 \subsection*{Arbitrary Lines and Planes}
 	
@@ -681,12 +588,12 @@ requestion, or opening an \emph{issue} at
 	same ``slope'' that passes through the origin, then we translate it
 	to the appropriate place.
 
-	\sep
+	\question
 	We'd like to write the equation of a line $L$ with normal vector
 	$\vec n=\begin{bmatrix}4\\-1\end{bmatrix}$ that passes through
 	the point $p=\mat{-1\\-1}$
 
-	\begin{Enum}
+	\begin{parts}
 		\item Give a scalar equation of the line $L_2$ which is parallel to $L$
 		but passes through the origin.
 		\item Draw a picture of $L$ and $L_2$, and find two points that lie on
@@ -696,27 +603,26 @@ requestion, or opening an \emph{issue} at
 		Should these values be zero, equal, or different?  Explain (think about
 		projections).
 		\item How does the equation $\vec n\cdot (\vec x-p)=0$ relate to $L$?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	$W$ is the plane with normal vector $\vec n=\mat{1\\2\\3}$ and that passes through
 	the point $p=\mat{1\\1\\2}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Write normal form of $W$.
 		\item Write vector form of $W$.
-	\end{Enum}
+	\end{parts}
 
-\newpage
 
 \section*{Arc Length}
 
-	\sep
+	\question
 	The parameterized curve
 	\[
 		\vec r(t) = \mat{2\cos t\\2\sin t}
 	\]
 	describes the position of a particle at time $t$.
-	\begin{Enum}
+	\begin{parts}
 		\item Describe the path and motion of this particle in words.
 		\item Compute the displacement  of the particle between $t=0$
 			and $t=\Delta t$ and call the resulting vector $\Delta \vec r$.  
@@ -730,28 +636,28 @@ requestion, or opening an \emph{issue} at
 			vector $\vec v_0$.
 		\item Use a limit to compute the speed at $t=0$.  Call this value $s_0$.
 		\item How do $\|\vec v_0\|$ and $s_0$ relate?  Why?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	A particle's path is parameterized by
 	\[
 		\vec m(t) = (f(t), g(t), h(t))
 	\]
 	where $t$ represents time.
-	\begin{Enum}
+	\begin{parts}
 		\item Derive (with explanation) a formula for the velocity of
 			the particle at time $t=t_0$.
 		\item Derive (with explanation) a formula for the speed of
 			the particle at time $t=t_0$.
-	\end{Enum}
+	\end{parts}
 	
-	\sep
+	\question
 	Recall the particle whose path is given by
 	$
 		\vec r(t) = \mat{2\cos t\\2\sin t}
 	$
 	where $t$ represents time.
-	\begin{Enum}
+	\begin{parts}
 		\item Use the fact that
 			\[
 				\text{distance traveled}=\int\text{\it speed}\ \mathrm{d}\text{\it time}
@@ -760,7 +666,7 @@ requestion, or opening an \emph{issue} at
 		\item Use geometry to do the same thing.
 		\item Derive an expression (with explanation) for the arc length of $\vec m(t) = (f(t), g(t), h(t))$
 			from $t=0$ to $t=t_0$.
-	\end{Enum}
+	\end{parts}
 
 \subsection*{Arc Length Parameterization}
 	
@@ -769,9 +675,8 @@ requestion, or opening an \emph{issue} at
 	is $t_0$ for all valid choices of $t_0$.  I.e., the distance traveled by the parameter along
 	$\R$ is the same as the distance traveled by the point $\vec s(t)$ in $\R^n$.
 
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Produce an arc length parameterization of the curve parameterized by
 			$
 				\vec r(t) =\mat{2\cos t\\ 2\sin t}.
@@ -780,7 +685,7 @@ requestion, or opening an \emph{issue} at
 			$
 				\vec q(t) =\mat{t\\ t^{3/2}}.
 			$
-	\end{Enum}
+	\end{parts}
 
 	
 	An arc length parameterization of a curve can also be thought of
@@ -791,29 +696,30 @@ requestion, or opening an \emph{issue} at
 	By reparameterizing, we can describe the motion of a particle along
 	a path at any speed.
 
-	\sep
+	\question
 	A particle moves along a path $C$, which is a circle in $\R^2$ of radius $3$, centered at the origin, and oriented counter-clockwise.
-	\begin{Enum}
+	\begin{parts}
 		\item Parameterize $C$ so that the speed is $2.5$.
 		\item Parameterize $C$ so that the speed of the particle starts and ends at $0$.
 		\item Parameterize $C$ so that the speed of the particle starts at $0$ and ends at $4$.
 		\item Parameterize $C$ so that the speed of the particle is $0$ at six points along the curve.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	A particle's motion is described by the function $\vec h(t) = \mat{f(t)\\ g(t)}$,  which is a 
 	parameterization of the curve $H$.  The arc length of $H$ from $t=0$ to
-	$t=t_0$ using this parameterization is is given by the function $s(t_0) = t_0^2$.
-	\begin{Enum}
+	$t=t_0$ using this parameterization is given by the function $s(t_0) = t_0^2$.
+	\begin{parts}
 		\item Write an expression for the speed of the particle at time $t$.
 		\item Give a formula for the arc length parameterization of $H$.
-	\end{Enum}
+	\end{parts}
 
-	
+
+
+
 \section*{Tangents, Normals, and Acceleration}
 	
-	\vspace{-1cm}
-	\begin{Def}
+	\begin{definition}[Velocity \& Acceleration]
 	Suppose $\vec r(t)$ describes the motion of a particle.  The \emph{velocity}
 	of the particle is defined as
 	\[
@@ -824,26 +730,26 @@ requestion, or opening an \emph{issue} at
 	\[
 		\vec a(t) = \lim_{h\to 0} \frac{\vec v(t+h)-\vec v(t)}{h}.
 	\]
-	\end{Def}
+	\end{definition}
 	Both $\vec v$ and $\vec a$ are vector-valued derivatives.
 
-	\sep
+	\question
 	Let $\vec r(t) = \mat{t+2\\ \sin t\\ t^3}$ represent the position of a particle at time $t$.
-	\begin{Enum}
+	\begin{parts}
 		\item Find the velocity of the particle at time $t$.
 		\item Find the acceleration of the particle at time $t$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $\vec r_\ell(t) = \mat{\frac{t^2}{2}\\\frac{t^2}{2}}$ and $\vec r_c(t) = \mat{\cos t\\ \sin t}$ represent the position
 	of the particles $r_\ell$ and $r_c$ at time $t$.
-	\begin{Enum}
+	\begin{parts}
 		\item Describe the paths of each of these particles.  What should their accelerations be?  Why?
 		\item Compute the accelerations of $r_\ell$ and $r_c$ at time $t$.
 		\item Compute the tangent vectors for the functions $\vec r_\ell$ and $\vec r_c$ at time $t$.
 			How does the direction of the tangent vectors and the direction of the acceleration vectors
 			compare?
-	\end{Enum}
+	\end{parts}
 
 	If $\vec r(t)$ describes the position of a particle at time $t$ and $\vec a(t)$ its acceleration, $\vec a(t)$
 	can be decomposed into a \emph{tangential} component, $\vec a_T(t)$, and a \emph{normal} component $\vec a_N(t)$
@@ -852,23 +758,22 @@ requestion, or opening an \emph{issue} at
 		\vec a(t) = \vec a_T(t) +\vec a_N(t).
 	\]
 
-	\sep
+	\question
 	Let $\vec r_{c\ell}(t) = \mat{\frac{t^2}{2}+\cos t\\\frac{t^2}{2}+\sin t}$  represent the position
 	of the particle $r_{c\ell}$ at time $t$.
-	\begin{Enum}
+	\begin{parts}
 		\item Compute the tangential and normal components of the acceleration of $r_{c\ell}$.
 		\item By changing the speed of $r_{c\ell}$ (but not its path), is it possible to make 
 			the tangential component of its acceleration zero?
 		\item By changing the speed of $r_{c\ell}$ (but not its path), is it possible to make 
 			the normal component of its acceleration zero?
-	\end{Enum}
+	\end{parts}
 
 	We're going to develop some tools to mathematically verify our intuition about the acceleration
 	vector.
 
-	\sep
-	\vspace{-1cm}
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Suppose $\vec p(t)$ and $\vec q(t)$ are both vector-valued functions.  Expand $\vec p(t)\cdot\vec q(t)$
 		using components. Now, come up with an expression for $\Big(\vec p(t)\cdot\vec q(t)\Big)'$.  Look at your
 		result and rewrite it as an expression involving dot products.
@@ -877,11 +782,10 @@ requestion, or opening an \emph{issue} at
 			for $\|\vec p(t)\|'$.
 		\item If a particle whose path is given by $\vec r(t)$ is moving at unit speed, then $\|\vec v(t)\| = 1$.
 			Take derivatives of both sides of this expression to show that $\vec v(t)\cdot \vec a(t) = 0$.
-	\end{Enum}
+	\end{parts}
 
 
 
-\vspace{-.5cm}
 \section*{Visualizing Surfaces}
 	As we've already seen, being able to picture multi-dimensional objects is 
 	invaluable when intuiting solutions and when coming up with mathematical
@@ -889,34 +793,34 @@ requestion, or opening an \emph{issue} at
 	2D surfaces: perspective drawings and level-curves.
 
 
-	\sep
+	\question
 		Consider the surface defined by $z=f(x,y)$ where $f(x,y)=x^2+y^2$.
-	\begin{Enum}
+	\begin{parts}
 		\item On a single $xy$-plane, draw the set of points satisfying the equations $0=f(x,y)$, $1=f(x,y)$,
 			$2=f(x,y)$, $3=f(x,y)$, and $4=f(x,y)$.  What is the set of points satisfying $-1=f(x,y)$?
-	\end{Enum}
+	\end{parts}
 	The curves you just drew are called \emph{level curves}.
-	\begin{Enum}[resume]
+	\begin{parts}[resume]
 		\item Plot in 3D the function $z=f(x,y)$ for $z=0,1,2,3,4$.  Are you able to see what this surface looks like?
 		\item We can plot more and more contours of this surface until we have a good idea of what it looks like.
 			Add the set of points $z=f(0,y)$ and $z=f(x,0)$ to your plot.
-	\end{Enum}
+	\end{parts}
 
 
-	\sep
+	\question
 	Level curves are contours produced by fixing $z$ and graphing the result.  Other useful contours
 	come about by fixing $x$ or $y$.  Use any contour-based method to plot the following surfaces.
-	\begin{Enum}
+	\begin{parts}
 		\item $z=x^2-y^2$
 		\item $z^2=4x^2+y^2$
 		\item $z^2=9-(4x^2+y^2)$
 		\item $z=(\sin x)(\sin y)$
-	\end{Enum}
+	\end{parts}
 
 \newpage
 \section*{Directional Derivatives}
 
-	\sep
+	\question
 	It is winter in Chicago.  Imagine a bug crawling along the floor of
 	a room that is $7\times 7$ meters.  Figure \ref{heatcontour1} shows the contour plot of the heat
 	of the floor in Fahrenheit.\footnote{The bug questions are due to Mairead Greene, Amy Ksir, and Christine von Renesse.}
@@ -928,7 +832,7 @@ requestion, or opening an \emph{issue} at
 		\caption{Heat contours for a room.}
 		\label{heatcontour1}
 	\end{figure}
-	\begin{Enum}
+	\begin{parts}
 		\item Where is the door to the outside?  Where is the window?  Where is the heater? Why?
 			What might be in the lower right corner of the room?
 		\item The bug would like to crawl from the window to the right wall along a path that minimizes
@@ -937,9 +841,9 @@ requestion, or opening an \emph{issue} at
 			Draw a graph of distance verses temperature for this part of the bug's journey.  How
 			do the starting values and ending values of your graph compare?  Is the accuracy of your
 			graph limited?
-	\end{Enum}
+	\end{parts}
 	
-	\sep Figure \ref{heatcontour2} shows the path the bug decided to follow.
+	\question Figure \ref{heatcontour2} shows the path the bug decided to follow.
 	\begin{figure}[h!]
 		\begin{center}
 			\includegraphics[width=3.5in]{heat_contour2.pdf}
@@ -948,7 +852,7 @@ requestion, or opening an \emph{issue} at
 		\caption{Heat contours for a room.}
 		\label{heatcontour2}
 	\end{figure}
-	\begin{Enum}
+	\begin{parts}
 		\item Find the average change in temperature from $P$ to $Q$ for the bugs journey.
 		\item Estimate the instantaneous rate of change of temperature at the point $P$.
 		\item Suppose $T(x,y)$ gives the temperature of the room at the coordinates $(x,y)$.
@@ -958,36 +862,40 @@ requestion, or opening an \emph{issue} at
 			\emph{with respect to distance} at the start of the bug's journey.
 		\item If the bug had decided to travel in a different direction, would the rate of change
 			of temperature be the same?  Explain.
-	\end{Enum}
+	\end{parts}
 	
 	\newpage
-	\sep
+	\question
 	Let $f(x,y) = 2(x-3)^2+y$
-	\begin{Enum}
+	\begin{parts}
 		\item Calculate the rate of change of $f$ at the origin 
 			in the directions $\xh$, $\yh$, $\vec a=(\tfrac{\sqrt{2}}{2},\tfrac{\sqrt{2}}{2})$.
 		\item Calculate the rate of change of $f$ at $p=(1,-1)$
 			in the directions $\xh$, $\yh$, $\vec a=(\tfrac{\sqrt{2}}{2},\tfrac{\sqrt{2}}{2})$.
-	\end{Enum}
+	\end{parts}
+
+
+
+
 
 \subsection*{A New Perspective on Derivatives}
 
 	In single-variable calculus, we deal with functions $g:\R\to\R$.  The derivative of this function
 	at a point $a$ is the rate of change of $g$ at the point $a$.
 
-	\sep
+	\question
 	Let $g(x)=x^2$.
-	\begin{Enum}
+	\begin{parts}
 		\item What is the rate of change of $g$ at the points $x=0,1,$ and $2$?  How about at $x=x_0$?
 		\item Use your knowledge of the rate of change of $g$ to \emph{approximate} $g(x)$ where
 			$x=0+\varepsilon, 1+\varepsilon,$ and $2-\varepsilon$ where $\varepsilon>0$ is a tiny number.
 		\item Write down three functions: $G_0$, $G_1$, and $G_2$ so that if $\varepsilon$ is tiny, $g(a+\varepsilon)\approx
 			g(a) + G_a(\varepsilon)$.  
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Recall $f(x,y)=2(x-3)^2+y$ from before.
-	\begin{Enum}
+	\begin{parts}
 		\item Write down a function $F_{(0,0)}:\R^2\to\R$ such that if $\vec u$ is a vector
 			and $\|\vec u\|$ is tiny, 
 			\[
@@ -1000,11 +908,11 @@ requestion, or opening an \emph{issue} at
 			tiny, $f\Big((1,-1)+\vec u\Big)\approx f(1,-1)+F_{(1,-1)}(\vec u)$.
 		\item Can a single number represent the rate of change of $f$ at the point $(0,0)$?  Why or why not?
 			If a number cannot, can you think of another object that can?
-	\end{Enum}
+	\end{parts}
 
 \newpage
 
-	\begin{Def}
+	\begin{definition}[Directional Derivative]
 		The \emph{directional derivative} of a function $f:\R^n\to\R^m$ at the
 		point $\vec a$ in the direction $\vec u$ is
 		\[
@@ -1012,11 +920,11 @@ requestion, or opening an \emph{issue} at
 		\]
 		I.e., it is the rate of change of $f$ at $\vec a$ heading in the direction of $\vec u$
 		with speed $\|\vec u\|$.
-	\end{Def}
+	\end{definition}
 
-	\sep
+	\question
 	Let $f(x,y) = (x+1)^2+2y$.
-	\begin{Enum}
+	\begin{parts}
 		\item Give a parameterization of all two dimensional unit vectors.
 		\item Use the definition of the directional derivative to compute
 			the directional derivative of $f$ at the point $(0,0)$ in the
@@ -1024,10 +932,9 @@ requestion, or opening an \emph{issue} at
 		\item Find the direction of the maximal directional derivative.  You
 			may find the identity $\sin t+\cos t = \sqrt{2}\sin(t+\tfrac{\pi}{4})$
 			helpful.
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.7cm}
-	\begin{Def}
+	\begin{definition}[Gradient]
 		The \emph{gradient} of a function $f:\R^n\to \R$ is
 		\[
 			\nabla f  = \left(
@@ -1037,20 +944,20 @@ requestion, or opening an \emph{issue} at
 			\right)
 		\]
 		where $x_1,\ldots, x_n$ are the parameters of $f$.
-	\end{Def}
+	\end{definition}
 	
-	\sep
+	\question
 	Let $f(x,y) = (x+1)^2+2y$ as before.
-	\begin{Enum}
+	\begin{parts}
 		\item Compute $\nabla f(0,0)$ (the gradient of $f$ at the point $(0,0)$).
 		\item Compute $\nabla f(0,0)\cdot \vec u$ for each of your parameterized unit vectors $\vec u$.
 			What do you notice?
 		\item Make a conjecture about how the gradient of a function can be used to compute directional derivatives.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Sticking with $f(x,y) = (x+1)^2+2y$, consider the surface $S=\{\big(x,y,f(x,y)\big):x,y\in\R^2\}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Describe $S$.  If $a\in S$, what should \emph{the tangent plane to $S$ at $a$} mean?
 		\item Compute the tangent plane, $\mathcal P$, to $S$ at the point $\big(0,0,f(0,0)\big)$ in vector form.
 		\item Find standard/normal form of the tangent plane and solve for $z$.  That is,
@@ -1059,28 +966,27 @@ requestion, or opening an \emph{issue} at
 		\item Consider the function $g=f-\mathcal P$.  That is, $g(x,y)=f(x,y)-z(x,y)$ where $z(x,y)$ is the
 			equation of the tangent plane.  What should the directional derivative of $g$ at $(0,0)$ be?
 			Does it depend on direction?
-	\end{Enum}
+	\end{parts}
 
 	So far, the gradient has been appearing in directional derivatives and tangent planes.
 	One might even argue that the gradient \emph{is} the derivative.  Unfortunately, the gradient
 	of a function existing is not sufficient for a function to be differentiable.
 
-	\vspace{-.7cm}
-	\begin{Def}
+	\begin{definition}[Differentiable]
 		The function $f:\R^n\to \R$ is \emph{differentiable} at $\vec a=(a_1,\ldots,a_n)$ if there exists
 		a tangent plane at $\vec a$.  That is, there exists some function $p(x_1,\ldots, x_n)
 		= c+\sum \alpha_i (x_i-a_i) = c+\vec \alpha \cdot(\vec x-\vec a)$ so that
 		\[
 			\lim_{\|\vec u\|\to0} \frac{f(\vec a + \vec u)-p(\vec a + \vec u)}{\|\vec u\|} = 0.
 		\]
-	\end{Def}
+	\end{definition}
 
 	There's just one trouble with this definition.  How do we take a limit as $\|\vec u\|\to 0$?
 
 \newpage
 \subsection*{Multidimensional Limits}
 
-	\begin{Def}
+	\begin{definition}[Limit]
 		If $f:\R^n\to \R$, then the \emph{limit of $f$ at $\vec a$} exists and is equal to $L$, written
 		$\displaystyle \lim_{\vec x\to\vec a} f(\vec x) = L$, if
 		for all $\varepsilon > 0$ there exists a $\delta > 0$ such that
@@ -1088,13 +994,13 @@ requestion, or opening an \emph{issue} at
 			0<\|\vec x-\vec a\| <\delta \qquad \text{implies}\qquad |f(\vec x) - L| < \varepsilon.
 		\]
 		If no such $L$ exists, we say the limit does not exist.
-	\end{Def}
+	\end{definition}
 	When first considered, the definition of limit can be confusing, so let's play with some functions
 	that we're familiar with.
 
-	\sep
+	\question
 	Let $f(x) = 3x$.
-	\begin{Enum}
+	\begin{parts}
 		\item  Draw the graph of $f$ and use your intuition to guess $\lim_{x\to 0} f(x)$.  Call your
 			guess $L$.
 		\item If $\varepsilon = 1/2$, can you find a $\delta$ so that if $|x-0|<\delta$ we can be assured
@@ -1102,65 +1008,65 @@ requestion, or opening an \emph{issue} at
 		\item If $\varepsilon = 1/4$, can you find a $\delta$ so that if $|x-0|<\delta$ we can be assured
 			$|f(x)-L|<\varepsilon$?
 		\item Come up with a rule for how to choose an appropriate $\delta$ for any $\varepsilon$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $g(x) = \frac{x}{|x|}$, and let $L$ be a guess for $\lim_{x\to 0} \frac{x}{|x|}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Suppose we guess $L=1$.  Picking $\varepsilon = 3/2$, can you find an appropriate
 			$\delta$?  What if $L=-1$?  For $\varepsilon=3/2$, can you find an appropriate $\delta$?
 			What if $L=0$?  What values can we rule out as possibilities for $L$?
 		\item Suppose we guess $L=0$.  Picking $\varepsilon=3/2$, can you find an appropriate $\delta$?
 			Is $0$ the limit?  Explain.
 		\item Find an $\varepsilon$ that shows that $g$ has no limit at $0$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $h(x,y) = \frac{xy^2}{x^2+y^2}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Give a parameterization of all vectors in $\R^2$ with length $r$.
 		\item If $\vec u\in \R^2$ satisfies $\|\vec u\|=r$, can you give upper
 			and lower bounds on $h(\vec u)$?
 		\item Explain why the limit $\displaystyle \lim_{\|\vec u\|\to 0} h(\vec u)$
 			does or doesn't exist.
-	\end{Enum}
-	\sep
+	\end{parts}
+	\question
 	Let $h(x,y) = \frac{xy}{x^2+y^2}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Give a parameterization of all vectors in $\R^2$ with length $r$.
 		\item If $\vec u\in \R^2$ satisfies $\|\vec u\|=r$, can you give upper
 			and lower bounds on $h(\vec u)$?
 		\item Explain why the limit $\displaystyle \lim_{\|\vec u\|\to 0} h(\vec u)$
 			does or doesn't exist.
-	\end{Enum}
+	\end{parts}
 
 
 \newpage
 \subsection*{Lagrange Multipliers}
 
-	\sep
+	\question
 	We know that $\nabla f(\vec a)\cdot \vec u$ gives the directional derivative
 	of $f$ at the point $\vec a$ in the direction $\vec u$.  Suppose
 	$\nabla f(\vec a) = (1,3)$.
-	\begin{Enum}
+	\begin{parts}
 		\item What is the direction of the biggest rate of change of $f$ at $\vec a$? Why?
 		\item In what direction is the least change in $f$ at $\vec a$?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Suppose $C$ is a level curve of $f$.  For $\vec a\in C$, suppose $\vec T_a$ is a tangent vector to
 	$C$ at $\vec a$.
-	\begin{Enum}
+	\begin{parts}
 		\item What is the rate of change of the function $f$ at $\vec a$ in the direction $\vec T_a$?
 		\item What is $\nabla f(\vec a)\cdot \vec T_a$?
 		\item If $f(x,y)=x^3+y^2$, find a tangent vector to the curve $C=\{(x,y):f(x,y)=2\}$ at $(1,1)$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Consider a function $f:\R^2\to \R$ and a curve $C$ (not a level curve).  Let $\vec r(t)$
 	be a parameterization of $C$.  We are interested in the minimum and maximum values for 
 	$f\circ \vec r$ (i.e., the min/max values of $f$ on the curve $C$).
-	\begin{Enum}
+	\begin{parts}
 		\item What will $(f\circ \vec r)'$ be at a local maximum or minimum?
 		\item Explain how to interpret the quantity $(f\circ \vec r)'(t)$
 			as a directional derivative.
@@ -1169,11 +1075,11 @@ requestion, or opening an \emph{issue} at
 		\item Suppose $f(x,y) = 2x+y$ and $C$ is a circle of radius 1 centered at $\vec 0$.
 			Parameterize $C$ and attempt to find the maximum value that $f$ takes on the curve $C$.
 			Are these computations easy?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $f(x,y)=2x+y$ and let $C$ be a circle of radius 1 centered at $\vec 0$.
-	\begin{Enum}
+	\begin{parts}
 		\item Find a function $g:\R^2\to \R$ so that $C$ is a level curve of $g$.
 			Can you pick $g$ so that $C=\{(x,y): g(x,y)=0\}$?
 		\item What is the relationship between a tangent vector to $C$ at $\vec a$ and
@@ -1186,56 +1092,56 @@ requestion, or opening an \emph{issue} at
 			to find the maximum value the function $f$ attains on the curve $C$.  Congratulations,
 			you've just discovered \emph{Lagrange Multipliers}!
 
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	We will use Lagrange Multipliers to find the dimensions of the largest box (the one with the most volume)
 	given that the surface area is $32$.
-	\begin{Enum}
+	\begin{parts}
 		\item Write down the function we wish to optimize, call it $f$, and rephrase our constraint
 			on surface area so that we may interpret it as the level curve of some function $g$.
 		\item Write down a relationship between $\nabla f$ and $\nabla g$ at the maximum.
 		\item Write down all equations obtained thus far, and attempt to solve for the dimensions of the box.
 			Do we need to solve for every variable?
-	\end{Enum}
+	\end{parts}
 \newpage
 
 \section*{Iterated Integrals}
 	Integrals add things up, and iterated integrals are no different; it's just that instead of adding things
 	up in one dimension, we add things up in multiple dimensions.
 
-	\sep
+	\question
 	To get our bearings, let's revisit integrating with respect of $\mathrm{d}x$ and $\mathrm{d}y$
 	when finding area.  Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$.
-	\begin{Enum}
+	\begin{parts}
 		\item Draw a picture representing how a Riemann sum could be used to compute the area of $T$.
 		\item Draw a picture representing a different way to compute the area of $T$ using a Riemann sum.
 		\item Compute the area of $T$ using an integral with respect to $x$; now using an integral with 
 			respect to $y$; now using the formula $\frac{1}{2}base\times height$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $T$ be the triangle with vertices $(0,0)$, $(4,0)$, and $(4,3)$, and imagine that $T$
 	outlines a triangular strip of foil.  The density of this foil at any given point (in the 
 	first quadrant) is
 	$\rho(x,y) = x^2+y$.
-	\begin{Enum}
+	\begin{parts}
 		\item Using the fact that for this foil, $mass=density\times area$, write down two different
 			integrals that would compute the total mass of $T$, and draw their corresponding
 			Riemann-sum pictures.
 		\item Evaluate your two integrals.  Is one easier to evaluate than the other?
 		\item Can $(x^2+y)\mathrm{d}x\mathrm{d}y$ be interpreted on its own?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let the region $R\subset \R^2$ be the area between the parabola $x=y^2$ and the line $x=1$.  Let 
 	$f(x,y)=3x+y^2$.
-	\begin{Enum}
+	\begin{parts}
 		\item Write down two different iterated integrals to compute $\displaystyle \iint_R f(x,y)\d x\d y$.
 		\item Is one of your integrals easier to evaluate than the other?
 		\item Describe and draw a region $A$ so that 
 			$\displaystyle\iint_A f(x,y)\d x\d y = \int_{x=0}^{x=1}\int_{y=-\sqrt{1-x^2}}^{y=\sqrt{1-x^2}} f(x,y)\d y\d x$.
-	\end{Enum}
+	\end{parts}
 
 \subsection*{The Volume Form}
 	We've been using integrals to find the area or volume (or hypervolume) under a curve.
@@ -1243,8 +1149,8 @@ requestion, or opening an \emph{issue} at
 	add up each piece's contribution with an integral to find the total.  We're continuing the same
 	process, but we're going to start chopping regions up into (sometimes) non-rectangular chunks.
 
-	\sepl
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Draw the lines $x=x_0$, $x=x_0+\Delta x$, $y=y_0$ and $y=y_0+\Delta y$ where
 			$\Delta x$ and $\Delta y$ are assume to be small.  Write down a formula for the area enclosed by
 			those lines.  Does your formula depend on $x_0$ and $y_0$?
@@ -1259,9 +1165,9 @@ requestion, or opening an \emph{issue} at
 			area of the annular (ring-shaped) section you found earlier.  What is $\displaystyle \lim_{\Delta r, \Delta\theta\to 0}
 			\frac{\Delta V(r_0,\theta_0)}{V(r_0,\theta_0)}$?  Do we need the $(\Delta r)^2\Delta \theta$ term
 			at infinitesimal scales?
-	\end{Enum}
+	\end{parts}
 
-	\begin{Def}
+	\begin{definition}[Volume Form]
 		Suppose $\mathcal F$ is a coordinate system for $\R^2$ with a relationship
 		to rectangular coordinates given by 
 		$x=f_1(a,b)$ and $y=f_2(a,b)$.  The \emph{pre-volume form} associated with $\mathcal F$
@@ -1275,12 +1181,12 @@ requestion, or opening an \emph{issue} at
 		\]
 		and can obtained by replacing $\Delta w$ with $\d w$ and $(\Delta w)^2$ with $0$ in
 		the pre-volume form (where $w$ stands for any variable).
-	\end{Def}
+	\end{definition}
 	For coordinate systems in $\R^3$ (and $\R^n$), the volume form is defined in an analogous way.
 
 
-	\sepl
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Write down the pre-volume and volume forms for polar coordinates.  What are the functions
 			$f_1$ and $f_2$ for polar coordinates?
 		\item Write down the pre-volume and volume forms for rectangular coordinates.  What
@@ -1291,25 +1197,25 @@ requestion, or opening an \emph{issue} at
 		\item Consider the set $X=\{(a,b): 0\leq b\leq a^2\text{ and }0\leq a\leq 1\}$ specified in $\mathcal S$ coordinates.
 			Draw $X$ on the $\mathcal S$-coordinate plane and in standard coordinate plane.  Then, compute
 			the area of $X$ by setting up an integral using the volume form for $\mathcal S$ coordinates.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $f(x,y)=x^2+y^2$ and let $D$ be a disk of radius 2 centered at the origin.  We would like to
 	find $A=\displaystyle \int_D f\d V$.
-	\begin{Enum}
+	\begin{parts}
 		\item Write down the bounds of $D$ in rectangular coordinates and set up (but don't evaluate)
 			an integral for $A$.
 		\item Write down the bounds of $D$ in polar coordinates and set up (but don't evaluate) an 
 			an integral for $A$.
 		\item Find $A$ by evaluating whichever integral you want.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Cylindrical coordinates for $\R^3$ take the form $(r,\theta, z)$ where the
 	$xy$-plane is specified in polar coordinates by the first two components
 	and the height along the $z$-axis
 	is given by the third component.
-	\begin{Enum}
+	\begin{parts}
 		\item Compute the volume form for cylindrical coordinates.
 		\item A discuss is constructed from gluing two cones' bases together.
 			The radius of the base of each cone is $4$ and the height of each
@@ -1317,23 +1223,23 @@ requestion, or opening an \emph{issue} at
 			(you may need to describe the top and bottom separately)
 		\item The discuss has a density given by $\rho(x,y,z) = x^2+y^2+2|z|$.  Find the
 			mass of the discuss. (You may exploit symmetry.)
-	\end{Enum}
+	\end{parts}
 
 \newpage
 \section*{Surface Integrals}
 	We've done line integrals, which were adding up the values of a function along a curve.
 	Now we're going to do the same thing with surfaces.
 
-	\sepl
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1)$ and $\vec b=(4,0)$.
 		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(0,1,0)$ and $\vec b=(4,0,4)$.
 		\item Find the area of a parallelogram with adjacent sides given by $\vec a=(1,2,3)$ and $\vec b=(2,1,-1)$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $\mathcal S\subset \R^3$ be a surface and let $f:\mathcal S\to \R$ be a function.
-	\begin{Enum}
+	\begin{parts}
 		\item Think of two examples of surfaces $\mathcal S$ and functions $f$ that correspond
 			to the world you live in.
 		\item We'd like to add up (integrate) the values of $f$ over the surface $\mathcal S$.  Explain
@@ -1350,15 +1256,14 @@ requestion, or opening an \emph{issue} at
 			$\displaystyle \int_{\mathcal S} f$ with respect
 			to surface area using $\vec q$ and $Q$.  Justify your intuition with an explanation in
 			terms of Riemann sums.
-	\end{Enum}
+	\end{parts}
 
 	In the previous problem, $Q$ looked a lot like a volume form, but finding it from first principles
 	is hard!  Instead, we'll develop intuition and a formula for $Q$ using tangent planes.
 
-	\sep
-	\vspace{-.3cm}
+	\question
 	Suppose $\mathcal P\subset \R^3$ is a plane with parameterization $\vec p(t,s) = t\mat{1\\2\\3} + s\mat{1\\1\\1}$.
-	\begin{Enum}
+	\begin{parts}
 		\item Suppose $R_{(t_0,s_0)}\subset \R^2$ is a rectangle with lower left corner at $(t_0,s_0)$ and 
 			sides of length $\Delta t$ and $\Delta s$.  Find a function $Q$ so that $Q(t,s) =\text{area of }\vec p(R_{(t_0,s_0)})$.
 			Does $Q$ depend on $t_0$ and $s_0$?  Does this make sense?
@@ -1369,51 +1274,50 @@ requestion, or opening an \emph{issue} at
 			$(t_0,s_0)$?
 		\item Find a function $V(t,s)$ so that $\displaystyle\lim_{\Delta t,\Delta s\to 0} \frac{\tilde Q(t,s)}{V(t,s)\Delta t\Delta s}
 			=1$.  Does $V$ remind you of anything?
-	\end{Enum}
+	\end{parts}
 
 	Given a surface $\mathcal S$ parameterized by $r(t,s)$, there is a canonical way to write vector form
 	of the tangent plane to $\mathcal S$ at the point $(t,s,r(t,s))$ by using the directional derivatives
 	of $r$ in the $t$ direction and the $s$ direction as two direction vectors for your plane.
 	
-	\sep
+	\question
 	Consider the surface $\mathcal S$ parameterized by $(t,s,r(t,s))$ where $r(t,s) = t^2+s^2$ and $0\leq t\leq 1$ and $0\leq s\leq 1$.
-	\begin{Enum}
+	\begin{parts}
 		\item Find the canonical representation of the tangent plane to $\mathcal S$ at the point
 			$(t_0,s_0)$.
 		\item Let $R_{(t_0,s_0)}$ be a rectangle with lower left corner $(t_0,s_0)$ and sides of 
 			very short lengths $\Delta t$ and $\Delta s$.  Describe the set $I_{(t_0,s_0)}=\{(a,b,r(a,b)): (a,b)\in R_{(t_0,s_0)}\}$.
 		\item Give an estimation of the surface area of $I_{(t_0,s_0)}$.  What assumptions are you making?
 		\item Write down an integral to compute the surface area $\mathcal S$.
-	\end{Enum}
+	\end{parts}
 
 \newpage
 \section*{Vector Fields}
 
-	\vspace{-1cm}
-	\begin{Def}
+	\begin{definition}[Vector Field \& Scalar Field]
 		A \emph{scalar field} is a function $f:\R^n\to \R$.  A \emph{vector field}
 		is a function $g:\R^n\to\R^m$.
-	\end{Def}
+	\end{definition}
 
 	We've already worked with scalar fields---when we found the area above a curve and below
 	a surface, we were integrating a scalar field (namely the height of the function at a given point).
 	We'll now explore vector fields, which assign a vector to each point in space.
 	Since vectors can be used to represent forces, and velocities, and accelerations, vector fields are a key object of study in physics.
 
-	\sep
+	\question
 	Sketch the following vector fields.
-	\begin{Enum}
+	\begin{parts}
 		\item $\vec f(x,y) = x^2\xh +\yh$.
 		\item $\vec g(x,y) = (x,-y)$
 		\item $\nabla h(x,y)$ where $h(x,y) = -(x^2+y^2)$.
-	\end{Enum}
+	\end{parts}
 
 	We already have experience with some vector fields.  Namely, the gradient of a function is a vector field.
 	We're going to explore some special properties of vector fields arising from gradients.
 	
-	\sep
+	\question
 	Let $f(x,y) = x^2+y$, and let $A=(0,0)$ and $B=(1,1)$.
-	\begin{Enum}
+	\begin{parts}
 		\item Let $\vec x=(x,y)$, and compute $\nabla f(\vec x)$.   
 			If $\vec u$ is a vector with small
 			magnitude, how can $\nabla f(\vec x)$ be used to
@@ -1428,20 +1332,19 @@ requestion, or opening an \emph{issue} at
 		\item What does the amount of work represent?  Will the work done
 			depend on your path from $A$ to $B$?
 
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.7cm}
-	\begin{Def}
+	\begin{definition}[Conservative]
 		A vector field $\vec f$ is called \emph{conservative} if $\vec f=\nabla g$ for some $g$.
-	\end{Def}
+	\end{definition}
 
-	\sepl
-	\begin{Enum}
+	\question
+	\begin{parts}
 		\item Give two examples of conservative vector fields in $\R^2$.
 		\item Is the vector field $\vec f(x,y) = (x,-y)$ conservative?
 			Why or why not?
 		\item Give two examples of non-conservative vector fields in $\R^2$.
-	\end{Enum}
+	\end{parts}
 
 \subsection*{Let's get phisicsical}
 	Vector fields merely assign a vector to every point in space.  We've
@@ -1456,11 +1359,11 @@ requestion, or opening an \emph{issue} at
 	If $\mathcal S$ has an orientation, the flux is positive if the fluid moves ``out''
 	of $\mathcal S$ and negative if the fluid moves ``in'' $\mathcal S$.
 
-	\sep
+	\question
 	Let $\vec f(x,y,z)=(0,0,2)$.  Let $P(\vec u,\vec v)$ be the function
 	that outputs the parallelogram with adjacent sides given by $\vec u$ and
 	$\vec v$ and whose orientation is given by the right hand rule.
-	\begin{Enum}
+	\begin{parts}
 		\item Describe $P(\hat y, \hat x)$.  What is its orientation?
 		\item Compute the flux of $\vec f$ through the surface $R_1= P(\hat y, \hat x)$.
 		\item Compute the flux of $\vec f$ through the surface $R_2=
@@ -1473,42 +1376,41 @@ requestion, or opening an \emph{issue} at
 			$\vec f$ through $\mathcal S$?  Would your
 			answer be the same for the flux of $\vec g(x,y,z)=(0,0,2z)$
 			through $\vec S$?  Why or why not?
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $\vec f(x,y,z)=(0,0,-z)$ and let $\mathcal S$ be the surface
 	parameterized by $\vec s(u,v) = (u,v,u^2+v^2)$ for $u^2+v^2\leq 4$ oriented
 	downwards.
-	\begin{Enum}
+	\begin{parts}
 		\item Find the flux of $\vec f$ through $\mathcal S$ using the parameterization $\vec s$.
 		\item Let $\vec p(r,\theta)$ be a parameterization of $\mathcal S$
 			in cylindrical coordinates.  Find $\vec p$ and use $\vec p$
 			to find the flux of $\vec f$ through $\mathcal S$.
 		\item Does flux depend on the choice of parameterization?
-	\end{Enum}
+	\end{parts}
 
 	We're going to play the approximation game again (just like
 	we did when we discovered that tangent planes approximate a surface
 	near their point of tangency). But, this time, we're going
 	to be approximating flux.
 
-	\sep
+	\question
 	Let $C_{\Delta x,\Delta y,\Delta z}$ be the box with side lengths
 	$\Delta x$, $\Delta y$, $\Delta z$, parallel to the $xy$ and $xz$ planes
 	and with lower left corner at $\vec 0$.  Assume each face of the box is
 	oriented outwards.
 	Let $\vec f:\R^3\to\R^3$ be
 	a vector field.
-	\begin{Enum}
+	\begin{parts}
 		\item Find the normal vector and the surface area for each face of $C_{\Delta x,\Delta y,\Delta z}$.
 		\item Let $B$ be the bottom face of $C_{\Delta x,\Delta y,\Delta z}$.  Assuming
 			$\Delta x$ and $\Delta y$ are very small, what might be a reasonable
 			approximation for the flux of $\vec f$ through $B$?
 		\item Compute the approximate flux through $C_{\Delta x,\Delta y,\Delta z}$.
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.8cm}
-	\begin{Def}
+	\begin{definition}[Divergence]
 		Let $C_{\Delta x,\Delta y,\Delta z}(x,y,z)$ be a rectangular prism with side lengths $\Delta x$, 
 		$\Delta y$, and $\Delta z$, lower left corner at the point $(x,y,z)$ and faces oriented outwards.
 		For a vector field $\vec f:\R^3\to\R^3$, the \emph{divergence} of $\vec f$ at the point $(x,y,z)$
@@ -1519,35 +1421,33 @@ requestion, or opening an \emph{issue} at
 		\]
 		In other words, the divergence of $\vec f$ at a point is the amount of outward flux of $\vec f$
 		per unit volume at that point.
-	\end{Def}
+	\end{definition}
 
-	\vspace{-.5cm}
-	\begin{Enum}[resume]
+	\begin{parts}[resume]
 		\item Compute the divergence of $\vec f$ at $(0,0,0)$.
 		\item Compute the divergence of $\vec f$ at $(x,y,z)$.  Is $\nabla \cdot \vec f(x,y,z)$ a reasonable
 			notation for this?
-	\end{Enum}
+	\end{parts}
 
 	Divergence works in 2d just like it does in 3d (but 2d is easier to draw pictures of).
 
-	\sep
+	\question
 	Plot each vector field and estimate whether the divergence is positive,
 	negative, or zero.  Then, check your answer with a computation.
-	\begin{Enum}
+	\begin{parts}
 		\item $\vec f(x,y) = (x,y)$.
 		\item $\vec g(x,y) = (|x|, 0)$.
 		\item $\vec h(x,y) = (-y,x)$
 		\item $\vec l(x,y) = \mat{\frac{-y}{\sqrt{x^2+y^2}}\\\frac{x}{\sqrt{x^2+y^2}}}$.
-	\end{Enum}
+	\end{parts}
 
 \subsection*{Divergence}
-\vspace{-1cm}
-	\begin{Def}
+	\begin{definition}[Boundary]
 		Given a volume or area $V$, the \emph{boundary} of $V$
 		is denoted $\partial V$ and is assumed to have an outwards or counter clockwise orientation.
-	\end{Def}
+	\end{definition}
 
-	\begin{Def}
+	\begin{theorem}[Divergence Theorem]
 		The \emph{divergence theorem} (also called \emph{Gauss's theorem} or \emph{Ostrogradsky's
 		theorem}) states that for a vector field $\vec f$ and a region $R$, the flux of $\vec f$
 		through $\partial R$ equals the integral of the divergence of $\vec f$ over $R$.
@@ -1558,7 +1458,7 @@ requestion, or opening an \emph{issue} at
 		\]
 		where $\d V_R$ is the volume form for $R$, $\d V_{\partial R}$ is the volume form
 		for $\partial R$, and $\hat n$ is a unit normal vector to $\partial R$.
-	\end{Def}
+	\end{theorem}
 
 	If we interpret $\vec f$ as the velocity
 	of a fluid, the divergence of $\vec f$ can be thought of as how much fluid is being created or destroyed at a point.
@@ -1568,21 +1468,19 @@ requestion, or opening an \emph{issue} at
 
 	We will produce an intuition for the divergence theorem in 2 dimensions, since it's easier to draw.
 	
-	\sep
+	\question
 	Let $\vec f(x,y)=(x,y)$ be a vector field and let $R=[0,3]\times [0,3]$.
-	\begin{Enum}
+	\begin{parts}
 		\item Draw $\vec f$ and $R$.
 		\item Compute the flux of $\vec f$ through $\partial R$.
 		\item Divide $R$ up into tiny subsquares of equal size.  What is the sum of
 			the flux of $\vec f$ through all the subsquares?  Why?
 		\item Explain how a Riemann sum and the definition of divergence can be used
 			to motivate the divergence theorem.
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-.5cm}
 \subsection*{Curl}
 
-\vspace{-.3cm}
 	Curl is the compliment to divergence, and as the name suggests it has something to do
 	with rotations.
 
@@ -1590,15 +1488,14 @@ requestion, or opening an \emph{issue} at
 	$\vec x\in\R^3$ and interpreted $\vec f$ as the velocity of a fluid, the sphere might
 	start spinning, and this spinning is exactly what curl measures.  
 
-	\vspace{-.6cm}
-	\begin{Def}
+	\begin{definition}[Rotation]
 		An isometric parameterization $\vec p:\R^3\to\R^3$ is called an \emph{isometry}.
 		An isometry $\vec r:\R^3\to\R^3$ is called a \emph{rotation} if $\vec r(0,0,0)=(0,0,0)$
 		and if $\vec r$ is orientation preserving.  That is, $\vec r(1,0,0)\times \vec r(0,1,0) = \vec r(0,0,1)$.
 
 		If $\vec r:\R^3\to\R^3$ is a rotation, an \emph{axis of rotation} for $\vec r$ is a line
 		$\ell = \{t\vec d:t\in\R\}$ such that $\vec r(\ell) = \ell$.
-	\end{Def}
+	\end{definition}
 
 	Amazingly (though maybe you're used to this) any non-trivial rotation has exactly one axis of rotation!
 	This is something very special about 3D space (and it's not true in 4D and higher)!  
@@ -1613,21 +1510,20 @@ requestion, or opening an \emph{issue} at
 	if the rotation is counterclockwise and negative if it's clockwise (as judged by looking at
 	how the plane $\vec u\cdot \vec x=0$ rotates from the vantage point of $\vec u$).
 
-	\sep
+	\question
 	For each of the following rotations in $\R^3$, write down its representation as a vector.
-	\vspace{-.3cm}
-	\begin{Enum}
+	\begin{parts}
 		\item Rotation of the $xy$ plane counterclockwise by $\pi/3$.
 		\item Rotation of the $xy$ plane clockwise by $\pi/3$.
 		\item The rotation that sends $\xh$ to $\vec v=(\sqrt{2}/2, 0, \sqrt{2}/2)$.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $\vec f:\R^3\to\R^3$ be a vector field and let $R_{\Delta x, \Delta y}$ be the 
 	rectangle parallel to the $xy$-plane with lower left corner at $\vec 0$ and side lengths
 	$\Delta x$ and $\Delta y$.  Give $\partial R_{\Delta x, \Delta y}$ a counterclockwise
 	orientation.
-	\begin{Enum}
+	\begin{parts}
 		\item Let $B$ be the bottom of $\partial R_{\Delta x, \Delta y}$.  That is, 
 			$B=\{(x,0,0): 0\leq x\leq \Delta x\}$ with the orientation
 			inherited from $\partial R_{\Delta x, \Delta y}$.  If $\Delta x$
@@ -1645,10 +1541,9 @@ requestion, or opening an \emph{issue} at
 			Now, suppose that $\Delta x$ and $\Delta y$ are large.  Subdivide $R_{\Delta x, \Delta y}$
 			into small rectangles.  Using a Riemann sum idea, come up with a conjecture
 			about a theorem of similar form to the divergence theorem but for curl.
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-1cm}
-	\begin{Def}
+	\begin{definition}[Curl]
 		Let $R^{\vec v} (x,y,z)$ be a rectangle with side lengths $\Delta a$ and $\Delta b$, corner through
 		$(x,y,z)$, and with normal
 		vector $\vec v$. 
@@ -1662,33 +1557,32 @@ requestion, or opening an \emph{issue} at
 
 		The \emph{curl} of $\vec f$ at the point $(x,y,z)$ is the vector, notated $\nabla \times \vec f(x,y,z)$, so that
 		$(\nabla \times \vec f(x,y,z))\cdot \frac{\vec v}{\|\vec v\|} = {\mathrm curl}_{\vec v}(\vec f)$.
-	\end{Def}
+	\end{definition}
 
 	Computing curl from the definition each time can be cumbersome, so let's see
 	if there's a formula.
 	
-	\sep
+	\question
 	Let $\vec f:\R^3\to\R^3$ be a vector field.
-	\begin{Enum}
+	\begin{parts}
 		\item Write down the definition
 			for the $\hat x$, $\hat y$, and $\hat z$ components of the curl of $\vec f$.
 			Do you see anything that looks like a derivative?
 		\item Does the notation $\nabla \times \vec f(x,y,z)$ make sense for the curl of
 			$\vec f$ at a point?  Explain.
-	\end{Enum}
+	\end{parts}
 
-	\sep
+	\question
 	Let $\vec f:\R^3\to\R^3$ be a vector field and let $g:\R^3\to \R$ be a scalar field.
-	\begin{Enum}
+	\begin{parts}
 		\item What is the curl of the gradient of $g$?
 		\item What is the divergence of the curl of $\vec f$?  Does it
 			make sense to take the curl of the divergence of $\vec f$?
 		\item Could the vector field $\vec h(x,y,z) = (x,y,z)$ be the curl
 			of $\vec f$?
-	\end{Enum}
+	\end{parts}
 
-	\vspace{-1cm}
-	\begin{Def}
+	\begin{theorem}[Stokes's Theorem]
 		Let $\vec f:\R^3\to\R^3$ be a vector field, and let $\mathcal S$ be a surface.
 		\emph{Stokes's theorem} says that the work done by $\vec f$ on a particle traversing 
 		$\partial \mathcal S$ is equal to the flux of $\nabla \times \vec f$ through $\mathcal S$.
@@ -1702,11 +1596,6 @@ requestion, or opening an \emph{issue} at
 		for $\partial \mathcal S$ (in this case, it's the arc-length form), and 
 		$\d V_{\mathcal S}$ is the volume form for $\mathcal S$.
 
-	\end{Def}
-
-	
-	
-\newpage
-
+	\end{theorem}
 
 \end{document}
